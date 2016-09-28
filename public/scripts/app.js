@@ -1,19 +1,21 @@
 
-var sampleTours = [{
-  name: "Lily's Tour", 
-  author: "Lily Cole", 
-  city: "San Francisco", 
-  description: "Welcome to my wonderful walking tour of the beautiful city of San Francisco.",
-  image_url: "http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/site-photo.jpg"
-},
-{
-  name: "Teddy's Tour", 
-  author: "Teddy Coleman", 
-  city: "San Francisco", 
-  description: "Welcome to my mediocre walking tour of the beautiful city of San Francisco.",
-  image_url: "http://kaprizhardwoodfloors.com/wp-content/uploads/2015/12/san-francisco.jpg"
-}];
+$(document).ready(function() {
 
+  $.ajax({
+    method: "GET",
+    url: "/api/tours/",
+    success: function(tours){
+      renderTours(tours);
+      console.log(tours);
+    }
+  });
+
+  $('#create-new-tour').on('click',function(){
+    $('#tour-modal').modal();
+  });
+
+  $('#save-tour').on('click', createNewTour);
+});
 
 function renderTours(tourArray){
   var source = $('#tour-template').html();
@@ -24,15 +26,26 @@ function renderTours(tourArray){
 
 }
 
-$.ajax({
-  method: "GET",
-  url: "/api/tours/",
-  success: function(tours){
-    renderTours(tours);
-    console.log(tours);
-  }
-});
 
+function createNewTour(event){
+  var newTour = {
+    name: $('#tourName').val(),
+    author: $('#author').val(),
+    city: $('#city').val(),
+    description: $('#description').val(),
+    imageUrl: $('#image-url').val()
+  };
 
-// renderTours(sampleTours);
+  $.ajax({
+    method: "POST",
+    url: "/api/tours/",
+    data: newTour,
+    success: function(json){
+      renderTours([json]);
+      console.log("added :" + json);
+      $('#tour-modal').modal();
+    }
+  });
 
+  //TODO: Send to new page for creating tour
+}

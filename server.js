@@ -25,16 +25,21 @@ app.use(express.static('public'));
  * HTML endpoint
  */
 
-app.get('/', function(request,response){
-	response.sendFile(__dirname + '/views/index.html');
+app.get('/', function(req,res){
+	res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get('/api/tours/', function(request,response){
+app.get('/api/tours/', function(req,res){
 	db.Tour.find(function getAllTours(err,tours){
-		response.json(tours);
+		res.json(tours);
 	});
 });
 
+app.post('/api/tours', function(req,res){
+	var newTour = new db.Tour(req.body);
+	newTour.save();
+	res.send(newTour);
+});
 
 
 /**********
