@@ -8,9 +8,18 @@
 	<!-- Page Container -->
 	<div class="container" id="page">
 		<!-- Walking Tours Container -->
-		<% include ../partials/tourInfo %>
-
-
+		<div class="container" id="walking-tours">
+			<div class="row">
+				<div class="col-md-4 tour-photo">
+					<img src="<%= tour.imageUrl %>">
+				</div>
+				<div class="col-md-8 tour-info">
+					<h3><%= tour.name %> of <%= tour.city %></h3>
+					<h4>Author: <%= tour.author %></h4>
+					<p><%= tour.description %></p>
+				</div>
+			</div>
+		</div>
 
 	</div>
 </body>
