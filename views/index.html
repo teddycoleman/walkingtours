@@ -2,63 +2,48 @@
 <html>
 <head>
 	<title>Walking Tours</title>
+
+	<!-- Bootstrap Library -->
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../public/styles/style.css">
+
+    <!-- VENDOR SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
 </head>
 <body>
+	<!-- Page Container -->
 	<div class="container" id="page">
+		<!-- Header Row -->
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Walking Tours</h1>
 			</div>
 		</div> 
+		<!-- Walking Tours Container -->
 		<div class="container" id="walking-tours">
 			<!-- TODO : Add Handlebars for each row -->
-			<div class="row">
-				<div class="col-md-4 tour-photo">
-					<p>IMAGE PLACEHOLDER</p>
-				</div>
-				<div class="col-md-8 tour-info">
-					<h3>TOUR TITLE</h3>
-					<p>Tour description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 tour-photo">
-					<p>IMAGE PLACEHOLDER</p>
-				</div>
-				<div class="col-md-8 tour-info">
-					<h3>TOUR TITLE</h3>
-					<p>Tour description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 tour-photo">
-					<p>IMAGE PLACEHOLDER</p>
-				</div>
-				<div class="col-md-8 tour-info">
-					<h3>TOUR TITLE</h3>
-					<p>Tour description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
+			<script id="tour-template" type="text/javascript" type="text/x-handlebars-template">
+				{{#each tour}}
+					<div class="row">
+						<div class="col-md-4 tour-photo">
+							<img src="{{image_url}}">
+						</div>
+						<div class="col-md-8 tour-info">
+							<h3>{{name}}</h3>
+							<h4>Author: {{author}}</h4>
+							<p>{{description}}</p>
+						</div>
+					</div>
+				{{/each}}
+			</script>
 		</div>
 		<div class="row">
 			<button type="submit">Create New Tour</button>
 		</div>
 	</div>
+
+	<script src="../public/scripts/app.js"></script>
 </body>
 </html>
