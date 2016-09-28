@@ -20,8 +20,19 @@ function renderTours(tourArray){
   var template = Handlebars.compile(source);
   var tourHtml = template({ tour : tourArray });
   $('#walking-tours').append(tourHtml);
+  console.log(tourHtml);
 
 }
 
-renderTours(sampleTours);
+$.ajax({
+  method: "GET",
+  url: "/api/tours/",
+  success: function(tours){
+    renderTours(tours);
+    console.log(tours);
+  }
+});
+
+
+// renderTours(sampleTours);
 
