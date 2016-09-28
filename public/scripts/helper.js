@@ -1,22 +1,3 @@
-
-$(document).ready(function() {
-
-  $.ajax({
-    method: "GET",
-    url: "/api/tours/",
-    success: function(tours){
-      renderTours(tours);
-      console.log(tours);
-    }
-  });
-
-  $('#create-new-tour').on('click',function(){
-    $('#tour-modal').modal();
-  });
-
-  $('#save-tour').on('click', createNewTour);
-});
-
 function renderTours(tourArray){
   var source = $('#tour-template').html();
   var template = Handlebars.compile(source);
@@ -42,10 +23,10 @@ function createNewTour(event){
     data: newTour,
     success: function(json){
       renderTours([json]);
-      console.log("added :" + json);
-      $('#tour-modal').modal();
+      var id = json._id;
+      $('#tour-modal').modal('toggle');
+      $(location).attr('href','tours/' + id)
     }
   });
-
   //TODO: Send to new page for creating tour
 }
