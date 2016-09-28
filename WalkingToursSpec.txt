@@ -73,5 +73,19 @@ tourStops = {
 }
 
 
-1 - Figure out what data is needed to render on map 
-2 - Break down user stories into smaller users stories
+git remote -v
+git remote add upstream <url>
+git pull upstream master
+---make changes, add, commit etc ---
+git push origin master
+
+or... if on a branch
+
+git push origin <branch name> 
+
+git checkout <existing branch>
+git branch --all //Shows all branches you have access to 
+
+If conflicts: 
+git pull origin master  //pull down the code
+//HEAD is what I'm working on now, what's below it is what the other person is working on
