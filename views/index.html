@@ -9,6 +9,7 @@
 
     <!-- VENDOR SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
 </head>
@@ -42,6 +43,67 @@
 		<div class="row">
 			<button type="submit">Create New Tour</button>
 		</div>
+
+		<!-- begin tourModal: this is not visible until you call .modal() on it -->
+	    <div class="modal fade" tabindex="-1" role="dialog" id="tourModal">
+	      <div class="modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-header">
+	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	            <h4 class="modal-title">Create New Tour</h4>
+	          </div>
+	          <div class="modal-body">
+
+	            <fieldset class='form-horizontal'>
+	              <!-- Text input-->
+	              <div class="form-group">
+	                <label class="col-md-4 control-label" for="tourName">Tour Name</label>
+	                <div class="col-md-4">
+	                  <input id="tourName" name="tourName" type="text" placeholder="" class="form-control input-md" required="">
+	                </div>
+	              </div>
+
+	              <!-- Text input-->
+	              <div class="form-group">
+	                <label class="col-md-4 control-label" for="author">Author</label>
+	                <div class="col-md-4">
+	                  <input id="author" name="author" type="text" placeholder="" class="form-control input-md">
+	                </div>
+	              </div>
+
+				 <!-- Text input-->
+	              <div class="form-group">
+	                <label class="col-md-4 control-label" for="city">City</label>
+	                <div class="col-md-4">
+	                  <input id="city" name="city" type="text" placeholder="" class="form-control input-md">
+	                </div>
+	              </div>
+
+				 <!-- Text input-->
+	              <div class="form-group">
+	                <label class="col-md-4 control-label" for="description">Description</label>
+	                <div class="col-md-4">
+	                  <input id="description" name="description" type="text" placeholder="" class="form-control input-md">
+	                </div>
+	              </div>
+
+				 <!-- Text input-->
+	              <div class="form-group">
+	                <label class="col-md-4 control-label" for="image-url">Image Url</label>
+	                <div class="col-md-4">
+	                  <input id="image-url" name="image-url" type="text" placeholder="" class="form-control input-md">
+	                </div>
+	              </div>
+	            </fieldset>
+
+	          </div>
+	          <div class="modal-footer">
+	            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	            <button type="button" class="btn btn-primary" id="saveTour">Save changes</button>
+	          </div>
+	        </div><!-- /.modal-content -->
+	      </div><!-- /.modal-dialog -->
+	    </div><!-- /.modal -->
 	</div>
 
 	<script src="../public/scripts/app.js"></script>
