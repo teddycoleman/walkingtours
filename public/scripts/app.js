@@ -18,10 +18,9 @@ var sampleTours = [{
 function renderTours(tourArray){
   var source = $('#tour-template').html();
   var template = Handlebars.compile(source);
-  var tourHtml = template({ tour: tourArray });
-
-  // append html to the view
+  var tourHtml = template({ tour : tourArray });
   $('#walking-tours').append(tourHtml);
+
 }
 
 renderTours(sampleTours);
