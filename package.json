@@ -1,0 +1,23 @@
+{
+  "name": "walkingtours",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teddycoleman/walkingtours.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teddycoleman/walkingtours/issues"
+  },
+  "homepage": "https://github.com/teddycoleman/walkingtours#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.6.1"
+  }
+}
