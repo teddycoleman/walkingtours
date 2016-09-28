@@ -1,0 +1,17 @@
+<div class="container" id="walking-tours">
+	<!-- TODO : Add Handlebars for each row -->
+	<script id="tour-template" type="text/x-handlebars-template">
+		{{#each tour}}
+			<div class="row">
+				<div class="col-md-4 tour-photo">
+					<img src="{{imageUrl}}">
+				</div>
+				<div class="col-md-8 tour-info">
+					<h3>{{name}} of {{city}}</h3>
+					<h4>Author: {{author}}</h4>
+					<p>{{description}}</p>
+				</div>
+			</div>
+		{{/each}}
+	</script>
+</div>
