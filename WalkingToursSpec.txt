@@ -1,0 +1,77 @@
+Goal: Walking tours website where people can upload their own walking tours
+
+Phase 1 - Text Input for Tours:
+
+-Create tour object which is a collection of markers
+
+-Select between mulitple tours
+
+-Look into EJS (embedded JS) to build 2 different pages
+
+Phase 2 - Google Places API for adding Markers:
+
+-Create markers
+	-Enter lat/lng coordinates
+	-Enter descriptions 
+
+Phase 3 - Visual Input for Markers:
+
+-Render tour on map
+
+-Create tour by clicking on map and generating markers within a tour
+
+Phase 4 - Connect w/ route: 
+
+-Draw on map to connect A->B->C etc
+
+
+User Stories: 
+
+User can... 
+	(1)Create a new tour
+	(1)Give a tour a name/other meta data (length of tour, description, city, etc)
+	(1)Create a new marker with text enter of lat/lng
+	(1)Add a description to the marker
+	(1)Save marker(s) to a specific tour
+	(1)Read tour from database
+	(1)Update a marker (lat/lng/desc)
+	(1)Update a tour (delete/add marker)
+	(1)Delete a marker
+	(1)Render tour on map
+	(2)Click on map to generate a marker
+	(2)Add a description from the map 
+	(2)Save directly from map (or click button to do it...)
+	(2)Give markers an order 
+	(2)See on map the starting points for the tours
+	(3)Draw route/path between markers
+	(3)Drag/drop points on the map to reposition a route
+	(3)Filter tours by criteria (length, city, etc)
+	(3)Add photo to the markers
+	(3)Review tours
+
+
+Database schemas: 
+
+tourSchema = {
+	name: String, 
+	author: String, 
+	city: String, 
+	description: String,
+	image_url: String,
+}
+
+stopSchema = {
+	name: String,
+	description: String, 
+	googlePlacesId: Marker (Obj {place_id: String, location: LatLng (maybe can't do this based on terms of use - look at other ways to set marker based on place_id) })
+}
+
+tourStops = {
+	tour_id: (foreign key),
+ 	stop_id: (foreign key),
+	ord_num: Number
+}
+
+
+1 - Figure out what data is needed to render on map 
+2 - Break down user stories into smaller users stories
