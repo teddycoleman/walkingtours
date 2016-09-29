@@ -52,10 +52,11 @@ app.get('/api/tours/:id', function(req,res){
 	});
 });
 
-//TODO : add route to get all stops for a tour
+//Get all stops for a tour
 app.get('/api/tours/:id/stops', function(req,res){
-	db.TourStops.find({tour_id: req.params.id}, function getTourStops(err,tourStops){
-		res.json(tourStops);
+	db.TourStop.find({tour_id: req.params.id}).populate('stop_id').exec(function(err,tourStop){
+		if(err){throw err;}
+		res.send(tourStop);
 	});
 });
 
