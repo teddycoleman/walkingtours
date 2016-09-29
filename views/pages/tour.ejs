@@ -6,26 +6,28 @@
 	<script src="/scripts/tour.js"></script>
 </head>
 <body>
-	<!-- Page Container -->
+	<!-- CONTAINER -->
 	<div class="container" id="page">
-		<div class="container" id="tour-title">
-			<div class="row">
-				<div class="col-md-6 tour-photo">
-					<img src="<%= tour.imageUrl %>">
+		<!-- TOUR INFORMATION -->
+		<% include ../partials/tourInfo %>
+
+		<!-- LIST OF STOPS -->
+		<div class="container" id="tour-stops">
+			<script id="stop-template" type="text/x-handlebars-template">
+				<div class="container stop-container">
+					<div class="row stop" id={{_id}}>
+						<h3>{{name}}</h3>
+						<p>{{description}}</p>
+					</div>
 				</div>
-				<div class="col-md-6 tour-info">
-					<h1 class="tour-title-page"><%= tour.name %></h1>
-					<h4>City: <%= tour.city %></h4>
-					<h4>Author: <%= tour.author %></h4>
-					<p><%= tour.description %></p>
-				</div>
-			</div>
+			</script>
 		</div>
 
 		
 		<input id="pac-input" class="controls" type="text" placeholder="Enter a location">
     	<div id="map"></div>
     	
-	</div>
+	</div> <!-- END CONTAINER -->
+
 </body>
 </html>

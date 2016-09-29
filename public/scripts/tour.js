@@ -1,9 +1,8 @@
 
 $(document).ready(function() {
 
-  $('#create-new-tour').on('click',function(){
-    $('#tour-modal').modal();
-  });
+  showTourInfo();
+  showStops();
 
   $('#save-tour').on('click', createNewTour);
 
@@ -25,7 +24,7 @@ function initMap() {
 	var autocomplete = new google.maps.places.Autocomplete(input);
 	autocomplete.bindTo('bounds', map);
 
-	document.getElementById('tour-title').appendChild(input);
+	document.getElementById('tour-stops').appendChild(input);
 
 	var infowindow = new google.maps.InfoWindow();
 	var marker = new google.maps.Marker({
