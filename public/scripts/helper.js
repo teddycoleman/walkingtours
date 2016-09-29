@@ -31,7 +31,6 @@ function createNewTour(event){
 function showStops() {
   var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
   var pathname = "/api" + partialPathname + "stops";
-  console.log("pathname:",pathname);
   $.ajax({
     method: "GET",
     url: pathname,
@@ -58,4 +57,16 @@ function showTourInfo() {
       renderTours([data]);
     }
   }); 
+}
+
+function deleteTour() {
+  var pathname = "/api" + $(location).attr('pathname');
+  $.ajax({
+    method: 'DELETE',
+    url: pathname,
+    data: $(this).serializeArray(),
+    success: function() {
+      $(location).attr('href','/')
+    }
+  });
 }
