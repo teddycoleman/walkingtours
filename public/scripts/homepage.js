@@ -15,4 +15,10 @@ $(document).ready(function() {
   });
 
   $('#save-tour').on('click', createNewTour);
+
+  $('.container').on('click','.tour', function(){
+    console.log("clicked");
+    var id = $(this).closest('.tour').attr('id');
+    $(location).attr('href','tours/' + id);
+  });
 });

@@ -2,7 +2,7 @@
 	<!-- TODO : Add Handlebars for each row -->
 	<script id="tour-template" type="text/x-handlebars-template">
 		{{#each tour}}
-			<div class="row">
+			<div class="row tour" id={{_id}}>
 				<div class="col-md-4 tour-photo">
 					<img src="{{imageUrl}}">
 				</div>
