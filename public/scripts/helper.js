@@ -3,7 +3,6 @@ function renderTours(tourArray){
   var template = Handlebars.compile(source);
   var tourHtml = template({ tour : tourArray });
   $('#walking-tours').append(tourHtml);
-  console.log(tourHtml);
 }
 
 function createNewTour(event){
@@ -42,10 +41,11 @@ function showStops() {
 function renderStops(stopArray){
   var source = $('#stop-template').html();
   var template = Handlebars.compile(source);
+  console.log(stopArray);
   stopArray.forEach(function (stop, index) {
-      var stopHtml = template( stop.stop_id );
+      console.log(stop);
+      var stopHtml = template( stop.stop_id || stop );
       $('#tour-stops').append(stopHtml);
-      console.log(stopHtml);
   });
 }
 
@@ -58,4 +58,25 @@ function showTourInfo() {
       renderTours([data]);
     }
   }); 
+}
+
+function createNewStop(event){
+  var tourId = $('.tour-container').find('.tour').attr('id');
+
+  var newStop = {
+    name: $('#stopName').val(),
+    description: $('#description').val(),
+    googlePlacesId: currentGooglePlacesId
+  };
+
+  $.ajax({
+    method: "POST",
+    url: "/api/tours/"+ tourId+ "/stops",
+    data: newStop,
+    success: function(json){
+      renderStops([json]);
+      $('#stop-modal').modal('toggle');
+    }
+  })
+
 }

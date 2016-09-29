@@ -60,6 +60,21 @@ app.get('/api/tours/:id/stops', function(req,res){
 	});
 });
 
+//Create new stop
+app.post('/api/tours/:id/stops', function(req,res){
+	var newStop = new db.Stop(req.body);
+	newStop.save(function(err,stop){
+		if (err){throw err};
+		var tourStop = new db.TourStop({
+			tour_id: req.params.id,
+			stop_id: stop._id
+		});
+		tourStop.save();
+		res.json(newStop);
+	});
+
+});
+
 //Create new tour
 app.post('/api/tours', function(req,res){
 	var newTour = new db.Tour(req.body);
