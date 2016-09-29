@@ -92,3 +92,12 @@ function deleteTour() {
   });
 }
 
+
+function addNewStopHandler(){
+    if(currentGooglePlacesId.length === 0){
+      alert('please select a location first');
+    }
+    else{
+      $('#stop-modal').modal();
+    }
+  }

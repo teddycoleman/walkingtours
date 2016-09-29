@@ -4,9 +4,7 @@ $(document).ready(function() {
   showTourInfo();
   showStops();
 
-  $('#add-new-stop').on('click', function(){
-    $('#stop-modal').modal();
-  });
+  $('#add-new-stop').on('click', addNewStopHandler);
 
   $('#save-stop').on('click', createNewStop);
   $('#delete-tour-button').on('click', deleteTour);
@@ -14,9 +12,18 @@ $(document).ready(function() {
   //Init Google Maps API 
   initMap();
 
-  var currentGooglePlacesId = "";
-
 });
+
+var currentGooglePlacesId = "";
+
+function addNewStopHandler(){
+  if(!currentGooglePlacesId.length){
+    $('#pac-input').focus();
+  }
+  else{
+    $('#stop-modal').modal();
+  }
+}
 
 
 //Refactor TODO: change this to jQuery
