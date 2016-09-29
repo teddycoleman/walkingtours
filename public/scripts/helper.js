@@ -56,6 +56,7 @@ function showTourInfo() {
     success: function(data) {
       renderTours([data]);
       $('.edit-tour-button').on('click', editTour);
+      $('.update-tour-button').on('click', updateTour);
     }
   }); 
 }
@@ -93,7 +94,40 @@ function deleteTour() {
   });
 }
 
-function editTour() {
-  alert("You clicked on me!");
+function toggleEditFields() {
+  $('#tourName').toggle();
+  $('#update-tourName').toggle();
+  $('#tourAuthor').toggle();
+  $('#update-tourAuthor').toggle();
+  $('#tourCity').toggle();
+  $('#update-tourCity').toggle();
+  $('#tourDescription').toggle();
+  $('#update-tourDescription').toggle();
+  $('.update-tour-button').toggle();
+  $('.edit-tour-button').toggle();
 }
 
+function editTour() {
+  toggleEditFields();
+}
+
+function updateTour() {
+  toggleEditFields();
+  var pathname = "/api" + $(location).attr('pathname');
+  var formData = {
+    name: $('#update-tourName').val(),
+    author: $('#update-tourAuthor').val(),
+    city: $('#update-tourCity').val(),
+    description: $('#update-tourDescription').val(),
+    imageUrl: $('#tourImage').val()
+  }
+  console.log("formData:",formData);
+  $.ajax({
+    method: 'PUT',
+    url: pathname,
+    data: formData,
+    success: function() {
+      console.log("successfully updated!");
+    }
+  });
+}
