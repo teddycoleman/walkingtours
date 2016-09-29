@@ -2,16 +2,19 @@
 	<!-- TODO : Add Handlebars for each row -->
 	<script id="tour-template" type="text/x-handlebars-template">
 		{{#each tour}}
+		<div class="container tour-container">
 			<div class="row tour" id={{_id}}>
-				<div class="col-md-4 tour-photo">
+				<div class="row tour-image">
 					<img src="{{imageUrl}}">
 				</div>
-				<div class="col-md-8 tour-info">
-					<h3>{{name}} of {{city}}</h3>
+				<div class="row tour-description">
+					<h3>{{name}}</h3>
+					<h4>City: {{city}}</h4>
 					<h4>Author: {{author}}</h4>
 					<p>{{description}}</p>
 				</div>
 			</div>
+		</div>
 		{{/each}}
 	</script>
 </div>

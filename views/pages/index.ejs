@@ -15,8 +15,9 @@
 		</div> 
 		<!-- Walking Tours Container -->
 		<% include ../partials/tourInfo %>
+
 		<div class="row">
-			<button type="submit" id='create-new-tour'>Create New Tour</button>
+			<button type="submit" class="button" id='create-new-tour'>CREATE NEW TOUR</button>
 		</div>
 
 		<!-- begin tourModal: this is not visible until you call .modal() on it -->
@@ -34,7 +35,7 @@
 	              <div class="form-group">
 	                <label class="col-md-4 control-label" for="tourName">Tour Name</label>
 	                <div class="col-md-4">
-	                  <input id="tourName" name="tourName" type="text" placeholder="" class="form-control input-md" required="">
+	                  <input id="tourName" name="tourName" type="text" required="">
 	                </div>
 	              </div>
 
@@ -42,7 +43,7 @@
 	              <div class="form-group">
 	                <label class="col-md-4 control-label" for="author">Author</label>
 	                <div class="col-md-4">
-	                  <input id="author" name="author" type="text" placeholder="" class="form-control input-md">
+	                  <input id="author" name="author" type="text">
 	                </div>
 	              </div>
 
@@ -50,7 +51,7 @@
 	              <div class="form-group">
 	                <label class="col-md-4 control-label" for="city">City</label>
 	                <div class="col-md-4">
-	                  <input id="city" name="city" type="text" placeholder="" class="form-control input-md">
+	                  <input id="city" name="city" type="text">
 	                </div>
 	              </div>
 
@@ -58,7 +59,7 @@
 	              <div class="form-group">
 	                <label class="col-md-4 control-label" for="description">Description</label>
 	                <div class="col-md-4">
-	                  <input id="description" name="description" type="text" placeholder="" class="form-control input-md">
+	                  <input id="description" name="description" type="text">
 	                </div>
 	              </div>
 
@@ -66,15 +67,14 @@
 	              <div class="form-group">
 	                <label class="col-md-4 control-label" for="image-url">Image Url</label>
 	                <div class="col-md-4">
-	                  <input id="image-url" name="image-url" type="text" placeholder="" class="form-control input-md">
+	                  <input id="image-url" name="image-url" type="text">
 	                </div>
 	              </div>
 	            </fieldset>
 
 	          </div>
 	          <div class="modal-footer">
-	            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	            <button type="button" class="btn btn-primary" id="save-tour">Save changes</button>
+	            <button type="button" class="button" id="save-tour">SAVE</button>
 	          </div>
 	        </div><!-- /.modal-content -->
 	      </div><!-- /.modal-dialog -->

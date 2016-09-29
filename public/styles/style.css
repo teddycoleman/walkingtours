@@ -1,4 +1,58 @@
-img{
-	height: 100%;
+body {
+	padding-top: 20px;
+}
+
+.container {
+	top: 10000vh;
+	font-family: 'Rambla', sans-serif;
+}
+
+.container, .modal-footer, .tour-title-page{
+	text-align: center;
+}
+
+.tour-container, .tour-description, .tour-info {
+	text-align: left;
+}
+
+img {
 	width: 100%;
+	height: 30vh;
+}
+
+.tour-image, .tour-description {
+	border-right: 2px solid black; 
+  	border-left: 2px solid black;
+}
+.tour-image {
+	border-top: 2px solid black;
+}
+
+.tour-container {
+	width: 60%;
+	margin: 2% auto;
+}
+
+.tour-description {
+	padding: 2%;
+	border-bottom: 2px solid black;
+}
+
+#tour-title {
+	width: 80%;
+	height: 30vh;
+}
+
+.button {
+	background-color: black;
+	color: white;
+	border: 0px;
+	padding: 1%;
+}
+
+.button:hover {
+	background-color: gray;
+	color: white;
+	border: 0px;
+	padding: 1%;
 }
