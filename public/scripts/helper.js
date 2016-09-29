@@ -41,10 +41,32 @@ function renderStops(stopArray){
   var source = $('#stop-template').html();
   var template = Handlebars.compile(source);
   console.log(stopArray);
+
   stopArray.forEach(function (stop, index) {
       console.log(stop);
+      //Append to the informational part of the screen
       var stopHtml = template( stop.stop_id || stop );
       $('#tour-stops').append(stopHtml);
+
+      //Append to the maps part of the screen
+      var placeId = !!(stop.stop_id) ? stop.stop_id.googlePlacesId : stop.googlePlacesId;
+      //Use placeId for the request
+      var request = {
+        placeId: placeId
+      }
+      //Use service to grab info for the placeId and put on the map
+      service.getDetails(request, function(place, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(place.name);
+            infowindow.open(map, this);
+          });
+        }
+      });
   });
 }
 
@@ -93,11 +115,3 @@ function deleteTour() {
 }
 
 
-function addNewStopHandler(){
-    if(currentGooglePlacesId.length === 0){
-      alert('please select a location first');
-    }
-    else{
-      $('#stop-modal').modal();
-    }
-  }

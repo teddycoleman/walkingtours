@@ -28,10 +28,12 @@ function addNewStopHandler(){
 
 //Refactor TODO: change this to jQuery
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 37.7749, lng: -122.4194},
-    zoom: 13
+    zoom: 12
   });
+
+  service = new google.maps.places.PlacesService(map);
 
   var input = document.getElementById('pac-input');
 
@@ -40,10 +42,15 @@ function initMap() {
 
   document.getElementById('add-stop').appendChild(input);
 
-  var infowindow = new google.maps.InfoWindow();
+  infowindow = new google.maps.InfoWindow();
   var marker = new google.maps.Marker({
     map: map
   });
+
+  var request = {
+    placeId: 'ChIJnbFn3z5-j4ARoqlFeSBuvFA'
+  };
+
   marker.addListener('click', function() {
     infowindow.open(map, marker);
   });
@@ -68,10 +75,9 @@ function initMap() {
       location: place.geometry.location
     });
     marker.setVisible(true);
+    console.log(place);
 
-    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-        'Place ID: ' + place.place_id + '<br>' +
-        place.formatted_address);
+    infowindow.setContent('<div><strong>' + place.name + '</strong><br>');
     currentGooglePlacesId = place.place_id;
     infowindow.open(map, marker);
   });
