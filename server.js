@@ -23,7 +23,7 @@ var db = require('./models');
 app.use(express.static('public'));
 
 /*
- * HTML endpoint
+ * HTML endpoints
  */
 
 //Get homepage
@@ -37,6 +37,10 @@ app.get('/tours/:id', function(req,res){
 		res.render(__dirname + '/views/pages/tour', {tour: tour});
 	});
 });
+
+/*
+ * JSON endpoints
+ */
 
 //Get JSON for all tours
 app.get('/api/tours/', function(req,res){
@@ -80,6 +84,14 @@ app.post('/api/tours', function(req,res){
 	var newTour = new db.Tour(req.body);
 	newTour.save();
 	res.send(newTour);
+});
+
+// Delete a tour
+app.delete('/api/tours/:id', function deletePlace(req, res) {
+  db.Tour.findByIdAndRemove(req.params.id, function(err, removeTour){
+    if (err) { throw(err) };
+    res.json(removeTour);
+  });
 });
 
 

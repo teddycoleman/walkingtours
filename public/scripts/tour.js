@@ -9,6 +9,7 @@ $(document).ready(function() {
   });
 
   $('#save-stop').on('click', createNewStop);
+  $('#delete-tour-button').on('click', deleteTour);
 
   //Init Google Maps API 
   initMap();
