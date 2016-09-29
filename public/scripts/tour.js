@@ -1,9 +1,7 @@
 
 $(document).ready(function() {
 
-  $('#create-new-tour').on('click',function(){
-    $('#tour-modal').modal();
-  });
+  showTourInfo();
+  showStops();
 
-  $('#save-tour').on('click', createNewTour);
 });
