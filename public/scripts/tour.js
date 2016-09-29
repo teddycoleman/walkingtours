@@ -5,6 +5,7 @@ $(document).ready(function() {
   showStops();
 
   $('#save-tour').on('click', createNewTour);
+  $('#delete-tour-button').on('click', deleteTour);
 
   //Init Google Maps API 
   initMap();
