@@ -40,9 +40,9 @@ function showStops() {
 function renderStops(stopArray){
   var source = $('#stop-template').html();
   var template = Handlebars.compile(source);
-  console.log(stopArray);
+  // console.log(stopArray);
   stopArray.forEach(function (stop, index) {
-      console.log(stop);
+      // console.log(stop);
       var stopHtml = template( stop.stop_id || stop );
       $('#tour-stops').append(stopHtml);
   });
@@ -55,6 +55,7 @@ function showTourInfo() {
     url: pathname,
     success: function(data) {
       renderTours([data]);
+      $('.edit-tour-button').on('click', editTour);
     }
   }); 
 }
@@ -90,5 +91,9 @@ function deleteTour() {
       $(location).attr('href','/')
     }
   });
+}
+
+function editTour() {
+  alert("You clicked on me!");
 }
 

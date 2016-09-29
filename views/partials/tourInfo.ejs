@@ -1,5 +1,4 @@
 <div class="container" id="walking-tours">
-	<!-- TODO : Add Handlebars for each row -->
 	<script id="tour-template" type="text/x-handlebars-template">
 		{{#each tour}}
 		<div class="container tour-container">
@@ -11,7 +10,7 @@
 					<h3>{{name}}</h3>
 					<h4>City: {{city}}</h4>
 					<h4>Author: {{author}}</h4>
-					<p>{{description}}</p>
+					<p>{{description}} <button type="button" class="button edit-tour-button">EDIT TOUR</button></p>
 				</div>
 			</div>
 		</div>

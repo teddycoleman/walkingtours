@@ -7,6 +7,7 @@ $(document).ready(function() {
     success: function(tours){
       renderTours(tours);
       console.log(tours);
+      $('.edit-tour-button').toggle();
     }
   });
 

@@ -13,11 +13,11 @@ $(document).ready(function() {
 
   //Init Google Maps API 
   initMap();
-
+    
+  // }
   var currentGooglePlacesId = "";
 
 });
-
 
 //Refactor TODO: change this to jQuery
 function initMap() {
