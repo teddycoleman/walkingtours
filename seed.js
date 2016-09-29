@@ -30,9 +30,9 @@ var sampleStops = [{
 }];
 
 
-db.Tour.remove();
-db.Stop.remove();
-db.TourStop.remove();
+db.Tour.remove({});
+db.Stop.remove({});
+db.TourStop.remove({});
 
 db.Tour.create(sampleTours, function(err, tours){
   if (err) { return console.log('ERROR', err); }
