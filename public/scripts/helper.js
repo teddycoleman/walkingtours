@@ -29,7 +29,8 @@ function createNewTour(event){
 }
 
 function showStops() {
-  var pathname = "/api" + $(location).attr('pathname') + "/stops";
+  var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
+  var pathname = "/api" + partialPathname + "stops";
   console.log("pathname:",pathname);
   $.ajax({
     method: "GET",
