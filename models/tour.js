@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var TourSchema = new Schema({
+var tourSchema = new Schema({
   name: String,
   author: String,
   city: String,
@@ -9,6 +9,6 @@ var TourSchema = new Schema({
   imageUrl: String
 });
 
-var Tour = mongoose.model('Tour', TourSchema);
+var Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
