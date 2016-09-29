@@ -7,14 +7,15 @@
 <body>
 	<!-- Page Container -->
 	<div class="container" id="page">
-		<!-- Walking Tours Container -->
-		<div class="container" id="walking-tours">
+		<!-- TOUR INFORMATION -->
+		<div class="container" id="tour-title">
 			<div class="row">
-				<div class="col-md-4 tour-photo">
+				<div class="col-md-6 tour-photo">
 					<img src="<%= tour.imageUrl %>">
 				</div>
-				<div class="col-md-8 tour-info">
-					<h3><%= tour.name %> of <%= tour.city %></h3>
+				<div class="col-md-6 tour-info">
+					<h1 class="tour-title-page"><%= tour.name %></h1>
+					<h4>City: <%= tour.city %></h4>
 					<h4>Author: <%= tour.author %></h4>
 					<p><%= tour.description %></p>
 				</div>
