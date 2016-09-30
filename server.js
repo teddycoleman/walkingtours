@@ -87,13 +87,26 @@ app.post('/api/tours', function(req,res){
 });
 
 // Delete a tour
-app.delete('/api/tours/:id', function deletePlace(req, res) {
+app.delete('/api/tours/:id', function deleteTour(req, res) {
   db.Tour.findByIdAndRemove(req.params.id, function(err, removeTour){
     if (err) { throw(err) };
     res.json(removeTour);
   });
 });
 
+// Update a tour
+app.put('/api/tours/:id', function updateTour(req, res) {
+  db.Tour.findById(req.params.id, function(err, updateTour){
+    if (err) { throw(err) };
+    updateTour.name = req.body.name;
+    updateTour.author = req.body.author;
+    updateTour.city = req.body.city;
+    updateTour.description = req.body.description;
+    updateTour.imageUrl = req.body.imageUrl;
+    updateTour.save();
+    res.json(updateTour);
+  });
+});
 
 /**********
  * SERVER *
