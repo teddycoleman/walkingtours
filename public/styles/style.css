@@ -3,11 +3,10 @@ body {
 }
 
 .container {
-	top: 10000vh;
 	font-family: 'Rambla', sans-serif;
 }
 
-.container, .modal-footer, .tour-title-page{
+.container, .modal-footer, .tour-title-page, #add-stop{
 	text-align: center;
 }
 
@@ -21,20 +20,25 @@ body {
 	top: 90%;
 }
 
-.button-div, .tourInfo-div {
+.text-column {	
+	width: 10%;
+}
+
+/*.button-div, .tourInfo-div {
 	height: 100%;
 }
 
 .tourDescription-div {
 	height: 30vh;
-}
+}*/
 
 .stop-div {
 	height: 15vh;
 }
+
 img {
 	width: 100%;
-	height: 30vh;
+	height: 30vh;	
 }
 
 .tour-image, .tour-description {
@@ -45,7 +49,7 @@ img {
 	border-top: 2px solid black;
 }
 
-.tour-container, .stop-container{
+.tour-container {
 	width: 60%;
 	margin: 2% auto;
 }
@@ -56,7 +60,7 @@ img {
 }
 
 #tour-title {
-	width: 80%;
+	/*width: 80%;*/
 	height: 30vh;
 }
 
@@ -77,3 +81,8 @@ img {
 #map{
 	height: 500px;
 }
+
+/*div {
+	border: 1px solid green;
+}
+*/

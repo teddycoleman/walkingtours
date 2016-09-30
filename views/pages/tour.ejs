@@ -8,92 +8,112 @@
 <body>
 	<!-- PAGE CONTAINER -->
 	<div class="container" id="page">
-		<!-- TOUR INFORMATION -->
-		<% include ../partials/tourInfo %>
 
-		<!-- LIST OF STOPS -->
-		<div class="container" id="tour-stops">
-			<script id="stop-template" type="text/x-handlebars-template">
-				<div class="container stop-container">
-					<div class="row stop stop-div" id={{_id}}>
-						<div class="col-md-8 tourInfo-div">
-							<input type="text" id="google-place-id" value="{{googlePlacesId}}" style="display:none;">
-							<h3 id="stopNameId">{{name}}</h3>
-							<h3><input type="text" id="update-stopName" style="display:none;" value="{{name}}"></h3>
-							<p id="stopDescription">{{description}}</p>
-							<p><input type="text" id="update-stopDescription" style="display:none;" value="{{description}}"></p> 
-						</div>
-						<div class="col-md-4 button-div">
-							<div class="row">
-								<p><button type="button" class="button edit-stop-button">EDIT  STOP</button></p> 
-								<p><button type="button" class="button update-stop-button" style="display:none;">UPDATE  STOP</button></p>
-							</div>
-							<div class="row">
-								<p><button type="button" class="button delete-stop-button">DELETE  STOP</button></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</script>
-		</div>
+    <!-- ROW 1 -->
+    <div class="row">
 
-		<!-- ADD A NEW STOP -->
-		<div class="container" id="add-stops">
-			<div class="row" id="add-stop">
-				<input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-				<button type="button" class="button" id="add-new-stop">ADD NEW STOP</button>
-			</div>
-		</div>
-		
-    	<div id="map"></div>
+      <!-- TOUR INFORMATION -->
+        <% include ../partials/tourInfo %> 
 
-    	<!-- DELETE TOUR -->
-		<div class="container" id="delete-tour">
-			<div class="row">
-				<div class="col-md-12">
-					<button type="submit" class="button" id='back-to-tours'>BACK TO TOURS</button>
-					<button type="submit" class="button" id='delete-tour-button'>DELETE TOUR</button>
-				</div>
-			</div> 
-		</div>
-    	
-	</div> <!-- END CONTAINER -->
+    </div> <!-- END OF ROW 1 -->
 
-	<!-- MODAL: CREATE A NEW STOP -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="stop-modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Create New Stop</h4>
-          </div>
-          <div class="modal-body">
+    <!-- ROW 2 -->
+    <div class="row">
 
-            <fieldset class='form-horizontal'>
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="stopName">Stop Name</label>
-                <div class="col-md-4">
-                  <input id="stopName" name="stopName" type="text" required="">
+      <!-- COLUMN 1 -->
+      <div class="col-md-6">  
+
+        <!-- LIST OF STOPS -->
+        <div id="tour-stops">
+          <script id="stop-template" type="text/x-handlebars-template">
+            <div class="stop-container">
+              <div class="row stop stop-div" id={{_id}}>
+                <div class="col-md-8 tourInfo-div">
+                  <input type="text" id="google-place-id" value="{{googlePlacesId}}" style="display:none;">
+                  <h3 id="stopNameId">{{name}}</h3>
+                  <h3><input type="text" id="update-stopName" style="display:none;" value="{{name}}"></h3>
+                  <p id="stopDescription">{{description}}</p>
+                  <p><input type="text" id="update-stopDescription" style="display:none;" value="{{description}}"></p> 
+                </div>
+                <div class="col-md-4 button-div">
+                  <div class="row">
+                    <p><button type="button" class="button edit-stop-button">EDIT  STOP</button></p> 
+                    <p><button type="button" class="button update-stop-button" style="display:none;">UPDATE  STOP</button></p>
+                  </div>
+                  <div class="row">
+                    <p><button type="button" class="button delete-stop-button">DELETE  STOP</button></p>
+                  </div>
                 </div>
               </div>
+            </div>
+          </script>
+        </div>
 
-			 <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="description">Description</label>
-                <div class="col-md-4">
-                  <input id="description" name="description" type="text">
-                </div>
+        <!-- ADD A NEW STOP -->
+        <div id="add-stops">
+          <div class="row" id="add-stop">
+            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+            <button type="button" class="button" id="add-new-stop">ADD NEW STOP</button>
+          </div>
+        </div>
+
+        <!-- BACK TO TOURS and DELETE TOUR -->
+        <div id="delete-tour">
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit" class="button" id='back-to-tours'>BACK TO TOURS</button>
+              <button type="submit" class="button" id='delete-tour-button'>DELETE TOUR</button>
+            </div>
+          </div> 
+        </div>
+
+        <!-- MODAL: CREATE A NEW STOP -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="stop-modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create New Stop</h4>
               </div>
-            </fieldset>
+              <div class="modal-body">
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="button" id="save-stop">SAVE</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+                <fieldset class='form-horizontal'>
+                
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="stopName">Stop Name</label>
+                    <div class="col-md-4">
+                      <input id="stopName" name="stopName" type="text" required="">
+                    </div>
+                  </div>
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="description">Description</label>
+                    <div class="col-md-4">
+                      <input id="description" name="description" type="text">
+                    </div>
+                  </div>
+                </fieldset>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="button" id="save-stop">SAVE</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+      </div> <!-- END OF COLUMN 1 -->
+
+      <!-- COLUMN 2 -->
+      <div class="col-md-6">
+          <div id="map"></div>
+      </div>
+
+    </div> <!-- END OF ROW 2 -->
+  </div> <!-- END OF CONTAINER -->
+
 
 </body>
 </html>
