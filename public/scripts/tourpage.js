@@ -4,8 +4,8 @@ $(document).ready(function() {
   showTourInfo();
   showStops();
 
+  // Event Listeners for Buttons on Page
   $('#add-new-stop').on('click', addNewStopHandler);
-
   $('#save-stop').on('click', createNewStop);
   $('#delete-tour-button').on('click', deleteTour);
 
@@ -82,4 +82,3 @@ function initMap() {
     infowindow.open(map, marker);
   });
 }
-
