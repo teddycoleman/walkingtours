@@ -7,6 +7,7 @@ $(document).ready(function() {
   // Event Listeners for Buttons on Page
   $('#add-new-stop').on('click', addNewStopHandler);
   $('#save-stop').on('click', createNewStop);
+  $('#back-to-tours').on('click', backToTours);
   $('#delete-tour-button').on('click', deleteTour);
   $('#tour-stops').on('click', '.delete-stop-button', deleteStop);
 
@@ -31,7 +32,8 @@ function addNewStopHandler(){
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 37.7749, lng: -122.4194},
-    zoom: 12
+    zoom: 12,
+    scrollwheel: false
   });
 
   service = new google.maps.places.PlacesService(map);

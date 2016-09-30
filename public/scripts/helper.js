@@ -259,3 +259,7 @@ function updateStopSuccess(data) {
   $('#stopDescription').html(data.description + buttonString);
   $('.edit-stop-button').on('click', editStop);
 }
+
+function backToTours(event){
+  $(location).attr('href','/');
+}
