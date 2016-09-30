@@ -40,11 +40,12 @@ function showStops() {
 function renderStops(stopArray){
   var source = $('#stop-template').html();
   var template = Handlebars.compile(source);
-  console.log(stopArray);
+
 
   stopArray.forEach(function (stop, index) {
       console.log(stop);
       //Append to the informational part of the screen
+
       var stopHtml = template( stop.stop_id || stop );
       $('#tour-stops').append(stopHtml);
 
@@ -77,6 +78,8 @@ function showTourInfo() {
     url: pathname,
     success: function(data) {
       renderTours([data]);
+      $('.edit-tour-button').on('click', editTour);
+      $('.update-tour-button').on('click', updateTour);
     }
   }); 
 }
@@ -114,4 +117,41 @@ function deleteTour() {
   });
 }
 
+function toggleEditFields() {
+  $('#tourName').toggle();
+  $('#update-tourName').toggle();
+  $('#tourAuthor').toggle();
+  $('#update-tourAuthor').toggle();
+  $('#tourCity').toggle();
+  $('#update-tourCity').toggle();
+  $('#tourDescription').toggle();
+  $('#update-tourDescription').toggle();
+  $('.update-tour-button').toggle();
+  $('.edit-tour-button').toggle();
+}
+
+function editTour() {
+  toggleEditFields();
+}
+
+function updateTour() {
+  toggleEditFields();
+  var pathname = "/api" + $(location).attr('pathname');
+  var formData = {
+    name: $('#update-tourName').val(),
+    author: $('#update-tourAuthor').val(),
+    city: $('#update-tourCity').val(),
+    description: $('#update-tourDescription').val(),
+    imageUrl: $('#tourImage').val()
+  }
+  console.log("formData:",formData);
+  $.ajax({
+    method: 'PUT',
+    url: pathname,
+    data: formData,
+    success: function() {
+      console.log("successfully updated!");
+    }
+  });
+}
 
