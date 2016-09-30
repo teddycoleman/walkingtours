@@ -75,35 +75,8 @@ function renderStops(stopArray){
       });
   });
 
-  var fieldsToToggle = ['#stopNameId','#update-stopName',
-                      '#stopDescription','#update-stopDescription',
-                      '.edit-stop-button','.update-stop-button'];
-
-  $('.edit-stop-button').on('click', function editStop() {
-    var id = $(this).parents('.row')[0].id;
-    toggleFields(fieldsToToggle,id);
-  });
-  $('.update-stop-button').on('click', function updateStop() {
-    var id = $(this).parents('.row')[0].id;
-    toggleFields(fieldsToToggle,id);
-    var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
-    var pathname = "/api" + partialPathname +'stops/';
-    console.log("pathname:",pathname)
-    var formData = {
-      name: $('#update-stopName').val(),
-      description: $('#update-stopDescription').val(),
-      googlePlacesId: $('#place-id').val()
-    }
-    console.log("formData:",formData);
-    // $.ajax({
-    //   method: 'PUT',
-    //   url: pathname,
-    //   data: formData,
-    //   success: function() {
-    //     console.log("successfully updated!");
-    //   }
-    // });
-  });
+  $('.edit-stop-button').on('click', editStop);
+  $('.update-stop-button').on('click', updateStop)
 }
 
 // Shows specific Tour Information on Tour Page
@@ -114,19 +87,23 @@ function showTourInfo() {
     url: pathname,
     success: function(data) {
       renderTours([data]);
-      var fieldsToToggle = ['#tourName','#update-tourName',
-                            '#tourAuthor','#update-tourAuthor',
-                            '#tourCity','#update-tourCity',
-                            '#tourDescription', '#update-tourDescription',
-                            '.update-tour-button','.edit-tour-button'];
-      $('.edit-tour-button').on('click', function() {
-        editButton(fieldsToToggle);
-      });
-      $('.update-tour-button').on('click', function() {
-        updateTour(fieldsToToggle);
-      });
+      addTourListeners();
     }
   }); 
+}
+
+function addTourListeners() {
+  var fieldsToToggle = ['#tourName','#update-tourName',
+                        '#tourAuthor','#update-tourAuthor',
+                        '#tourCity','#update-tourCity',
+                        '#tourDescription', '#update-tourDescription',
+                        '.update-tour-button','.edit-tour-button'];
+  $('.edit-tour-button').on('click', function() {
+    editButton(fieldsToToggle);
+  });
+  $('.update-tour-button').on('click', function() {
+    updateTour(fieldsToToggle);
+  });
 }
 
 // Creates a new Stop, updates view on Page
@@ -197,23 +174,57 @@ function updateTour(fieldsToToggle) {
     method: 'PUT',
     url: pathname,
     data: formData,
-    success: updateSuccess
+    success: updateTourSuccess
   });
 }
 
-// Handles Success of Update Tour, renders updated values to Page
-function updateSuccess(data) {
+// When Update Tour is successful, render updated data to view
+function updateTourSuccess(data) {
   var buttonString = " <button type='button' class='button edit-tour-button'>EDIT  TOUR</button>"
   $('#tourName').html(data.name);
   $('#tourCity').html('City: '+data.city);
   $('#tourAuthor').html('Author: '+data.author);
   $('#tourDescription').html(data.description+buttonString);
-  var fieldsToToggle = ['#tourName','#update-tourName',
-                        '#tourAuthor','#update-tourAuthor',
-                        '#tourCity','#update-tourCity',
-                        '#tourDescription', '#update-tourDescription',
-                        '.update-tour-button','.edit-tour-button'];
-  $('.edit-tour-button').on('click', function() {
-    editButton(fieldsToToggle);
+  addTourListeners();
+}
+
+// Toggles fields with EDIT STOP button is pressed
+function editStop() {
+  var fieldsToToggle = ['#stopNameId','#update-stopName',
+                      '#stopDescription','#update-stopDescription',
+                      '.edit-stop-button','.update-stop-button'];
+  var id = $(this).parents('.row')[0].id;
+  toggleFields(fieldsToToggle,id);
+}
+
+// Toggles fields and sends data to db when UPDATE STOP is pressed
+function updateStop() {
+  var fieldsToToggle = ['#stopNameId','#update-stopName',
+                      '#stopDescription','#update-stopDescription',
+                      '.edit-stop-button','.update-stop-button'];
+  var id = $(this).parents('.row')[0].id;
+  toggleFields(fieldsToToggle,id);
+  var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
+  var pathname = "/api" + partialPathname +'stops/';
+  var formData = {
+    name: $('#update-stopName').val(),
+    description: $('#update-stopDescription').val(),
+    googlePlacesId: $('#google-place-id').val(),
+    stopId: id
+  }
+  $.ajax({
+    method: 'PUT',
+    url: pathname,
+    data: formData,
+    success: updateStopSuccess
   });
+}
+
+// When Update Stop is successful, render updated data to view
+function updateStopSuccess(data) {
+  var buttonString =  "<button type='button' class='button edit-stop-button'>EDIT  STOP</button>" +  
+                      "<button type='button' class='button delete-stop-button'>DELETE  STOP</button>"
+  $('#stopNameId').html(data.name),
+  $('#stopDescription').html(data.description + buttonString);
+  $('.edit-stop-button').on('click', editStop);
 }
