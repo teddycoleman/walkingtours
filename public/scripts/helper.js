@@ -47,11 +47,12 @@ function renderStops(stopArray){
 
 
   stopArray.forEach(function (stop, index) {
-      console.log(stop);
+      // console.log("stop:",stop);
       
       // Adds Stop Text to Page
       var stopHtml = template( stop.stop_id || stop );
       $('#tour-stops').append(stopHtml);
+      // console.log("stopHtml",stopHtml);
 
       // Adds Stop Markers to Map
       var placeId = !!(stop.stop_id) ? stop.stop_id.googlePlacesId : stop.googlePlacesId;
@@ -83,8 +84,14 @@ function showTourInfo() {
     url: pathname,
     success: function(data) {
       renderTours([data]);
-      $('.edit-tour-button').on('click', editTour);
-      $('.update-tour-button').on('click', updateTour);
+      var fieldsToToggle = ['#tourName','#update-tourName','#tourAuthor','#update-tourAuthor','#tourCity','#update-tourCity','#tourDescription',
+                        '#update-tourDescription','.update-tour-button','.edit-tour-button'];
+      $('.edit-tour-button').on('click', function() {
+        editTour(fieldsToToggle);
+      });
+      $('.update-tour-button').on('click', function() {
+        updateTour(fieldsToToggle);
+      });
     }
   }); 
 }
@@ -124,28 +131,20 @@ function deleteTour() {
   });
 }
 
-// Toggles Fields for Editing Tour Information
-function toggleEditFields() {
-  $('#tourName').toggle();
-  $('#update-tourName').toggle();
-  $('#tourAuthor').toggle();
-  $('#update-tourAuthor').toggle();
-  $('#tourCity').toggle();
-  $('#update-tourCity').toggle();
-  $('#tourDescription').toggle();
-  $('#update-tourDescription').toggle();
-  $('.update-tour-button').toggle();
-  $('.edit-tour-button').toggle();
+function toggleFields(fieldArray) {
+  fieldArray.forEach(function(field, index) {
+    $(field).toggle();
+  })
 }
 
 // When Edit Tour button is pressed, toggle Fields
-function editTour() {
-  toggleEditFields();
+function editTour(fieldsToToggle) {
+  toggleFields(fieldsToToggle);
 }
 
 // When Update Tour button is pressed, toggle Fields and update Tour in database
-function updateTour() {
-  toggleEditFields();
+function updateTour(fieldsToToggle) {
+  toggleFields(fieldsToToggle);
   var pathname = "/api" + $(location).attr('pathname');
   var formData = {
     name: $('#update-tourName').val(),
