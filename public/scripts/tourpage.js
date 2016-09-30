@@ -12,7 +12,7 @@ $(document).ready(function() {
   $('#tour-stops').on('click', '.delete-stop-button', deleteStop);
   $('#tour-stops').on('click', '.edit-stop-button', editStop);
   $('#tour-stops').on('click', '.update-stop-button', updateStop);
-  $('.container').on('mouseenter','.stop-container',highlightStop);
+  $('.container').on('mouseenter','.stop', highlightStop);
 
   //Init Google Maps API 
   initMap();
