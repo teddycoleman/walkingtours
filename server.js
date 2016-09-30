@@ -108,6 +108,18 @@ app.put('/api/tours/:id', function updateTour(req, res) {
   });
 });
 
+// Update a stop
+app.put('/api/tours/:tour_id/stops/:stop_id', function updateStop(req, res) {
+  db.Stop.findById(req.params.id, function(err, updateStop){
+    if (err) { throw(err) };
+    updateStop.name = req.body.name;
+    updateStop.description = req.body.description;
+    updateStop.googlePlacesId = req.body.googlePlacesId;
+    updateStop.save();
+    res.json(updateStop);
+  });
+});
+
 /**********
  * SERVER *
  **********/
