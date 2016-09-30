@@ -205,6 +205,7 @@ function deleteStop(event){
       });
     }
   })
+}
 
 // When Update Tour is successful, render updated data to view
 function updateTourSuccess(data) {
