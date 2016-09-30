@@ -67,7 +67,7 @@ function renderStops(stopArray){
             map: map,
             position: place.geometry.location
           });
-          markers.push({marker: marker, placeId: request.placeId});
+          markers.push({marker: marker, name: place.name, placeId: request.placeId});
           google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent(place.name);
             infowindow.open(map, this);
@@ -259,4 +259,19 @@ function updateStopSuccess(data) {
 
 function backToTours(event){
   $(location).attr('href','/');
+}
+
+function highlightStop(event){
+  console.log(markers);
+  var self = this;
+  console.log($(self).find('#google-place-id').val());
+
+  markers.forEach(function(element){
+    console.log(element.placeId);
+    if(element.placeId === $(self).find('#google-place-id').val()){
+      infowindow.setContent('<div><strong>' + element.name + '</strong><br>');
+      console.log(element.marker);
+      infowindow.open(map, element.marker);
+    }
+  });
 }

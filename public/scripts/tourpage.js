@@ -12,6 +12,7 @@ $(document).ready(function() {
   $('#tour-stops').on('click', '.delete-stop-button', deleteStop);
   $('#tour-stops').on('click', '.edit-stop-button', editStop);
   $('#tour-stops').on('click', '.update-stop-button', updateStop);
+  $('.container').on('mouseenter','.stop-container',highlightStop);
 
   //Init Google Maps API 
   initMap();
@@ -80,7 +81,7 @@ function initMap() {
     });
     marker.setVisible(true);
     console.log("marker: " + place.place_id + place.geometry.location);
-    markers.push({placeId: place.place_id, marker: marker});
+    markers.push({placeId: place.place_id, name: place.name, marker: marker});
 
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>');
     currentGooglePlacesId = place.place_id;
