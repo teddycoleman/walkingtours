@@ -8,4 +8,3 @@ var TourStop = require('./tourStop');
 module.exports.Tour = Tour;
 module.exports.Stop = Stop;
 module.exports.TourStop = TourStop;
-

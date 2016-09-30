@@ -5,22 +5,24 @@
 	<script src="/scripts/homepage.js"></script>
 </head>
 <body>
-	<!-- Page Container -->
+	<!-- PAGE CONTAINER -->
 	<div class="container" id="page">
-		<!-- Header Row -->
+
+		<!-- TITLE ROW -->
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Walking Tours</h1>
 			</div>
 		</div> 
-		<!-- Walking Tours Container -->
+
+		<!-- LIST OF TOURS -->
 		<% include ../partials/tourInfo %>
 
 		<div class="row">
 			<button type="submit" class="button" id='create-new-tour'>CREATE NEW TOUR</button>
 		</div>
 
-		<!-- begin tourModal: this is not visible until you call .modal() on it -->
+		<!-- MODAL: CREATE A NEW TOUR -->
 	    <div class="modal fade" tabindex="-1" role="dialog" id="tour-modal">
 	      <div class="modal-dialog">
 	        <div class="modal-content">

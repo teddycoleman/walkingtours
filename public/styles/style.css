@@ -15,8 +15,9 @@ body {
 	text-align: left;
 }
 
-.edit-tour-button, .update-tour-button {
+.edit-tour-button, .update-tour-button, .update-stop-button, .edit-stop-button, .delete-stop-button {
 	float: right;
+	margin: 1%;
 }
 img {
 	width: 100%;
@@ -63,6 +64,3 @@ img {
 #map{
 	height: 500px;
 }
-
-
-

@@ -6,7 +6,7 @@
 	<script src="/scripts/tourpage.js"></script>
 </head>
 <body>
-	<!-- CONTAINER -->
+	<!-- PAGE CONTAINER -->
 	<div class="container" id="page">
 		<!-- TOUR INFORMATION -->
 		<% include ../partials/tourInfo %>
@@ -16,17 +16,23 @@
 			<script id="stop-template" type="text/x-handlebars-template">
 				<div class="container stop-container">
 					<div class="row stop" id={{_id}}>
-						<h3>{{name}}</h3>
-						<p>{{description}}</p>
+						<h3 id="stopName">{{name}}</h3>
+						<h3><input type="text" id="update-stopName" style="display:none;" value="{{name}}"></h3>
+						<p id="stopDescription">{{description}}
+							<button type="button" class="button edit-stop-button">EDIT  STOP</button>  
+							<button type="button" class="button delete-stop-button">DELETE  STOP</button></p>
+						<p><input type="text" id="update-stopDescription" style="display:none;" value="{{description}}"> 
+							<button type="button" class="button update-stop-button" style="display:none;">UPDATE  STOP</button></p>
 					</div>
 				</div>
 			</script>
 		</div>
 
+		<!-- ADD A NEW STOP -->
 		<div class="container" id="add-stops">
 			<div class="row" id="add-stop">
 				<input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-				<button type="button" class="button" id="add-new-stop">Add New Stop</button>
+				<button type="button" class="button" id="add-new-stop">ADD NEW STOP</button>
 			</div>
 		</div>
 		
@@ -43,7 +49,7 @@
     	
 	</div> <!-- END CONTAINER -->
 
-	<!-- begin tourModal: this is not visible until you call .modal() on it -->
+	<!-- MODAL: CREATE A NEW STOP -->
     <div class="modal fade" tabindex="-1" role="dialog" id="stop-modal">
       <div class="modal-dialog">
         <div class="modal-content">
