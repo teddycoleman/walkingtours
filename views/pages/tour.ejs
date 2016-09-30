@@ -20,51 +20,46 @@
     <!-- ROW 2 -->
     <div class="row">
 
+      <!-- COLUMN 2 -->
+      <div class="col-md-6 col-md-push-6">
+          <!-- MAP -->
+          <div id="map"></div>
+
+          <!-- ADD A NEW STOP -->
+          <div id="add-stops">
+            <div class="row" id="add-stop">
+              <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+              <button type="button" class="button" id="add-new-stop">ADD NEW STOP</button>
+            </div>
+          </div>
+
+      </div> <!-- END OF COLUMN 2 -->
+
       <!-- COLUMN 1 -->
-      <div class="col-md-6">  
+      <div class="col-md-6 col-md-pull-6">  
 
         <!-- LIST OF STOPS -->
         <div id="tour-stops">
           <script id="stop-template" type="text/x-handlebars-template">
-            <div class="stop-container">
-              <div class="row stop stop-div" id={{_id}}>
-                <div class="col-md-8 tourInfo-div">
-                  <input type="text" id="google-place-id" value="{{googlePlacesId}}" style="display:none;">
-                  <h3 id="stopNameId">{{name}}</h3>
-                  <h3><input type="text" id="update-stopName" style="display:none;" value="{{name}}"></h3>
-                  <p id="stopDescription">{{description}}</p>
-                  <p><input type="text" id="update-stopDescription" style="display:none;" value="{{description}}"></p> 
-                </div>
-                <div class="col-md-4 button-div">
-                  <div class="row">
-                    <p><button type="button" class="button edit-stop-button">EDIT  STOP</button></p> 
-                    <p><button type="button" class="button update-stop-button" style="display:none;">UPDATE  STOP</button></p>
+              <div class="row stop" id={{_id}}>
+
+                  <div class="col-md-8 tourInfo-div">
+                    <input type="text" id="google-place-id" value="{{googlePlacesId}}" style="display:none;">
+                    <h3 id="stopNameId">{{name}}</h3>
+                    <h3><input type="text" id="update-stopName" style="display:none;" value="{{name}}"></h3>
+                    <p id="stopDescription">{{description}}</p>
+                    <p><textarea id="update-stopDescription" row="3" cols="20" style="display:none;">{{description}}</textarea></p> 
                   </div>
-                  <div class="row">
-                    <p><button type="button" class="button delete-stop-button">DELETE  STOP</button></p>
+                  <div class="col-md-2 buttons-container">
+                    <p><button type="button" class="button edit-stop-button">EDIT</button></p> 
+                    <p><button type="button" class="button update-stop-button" style="display:none;">UPDATE</button></p>
                   </div>
-                </div>
+                  <div class="col-md-2 buttons-container">
+                    <p><button type="button" class="button delete-stop-button">DELETE</button></p>
+                  </div>
+
               </div>
-            </div>
           </script>
-        </div>
-
-        <!-- ADD A NEW STOP -->
-        <div id="add-stops">
-          <div class="row" id="add-stop">
-            <input id="pac-input" class="controls" type="text" placeholder="Enter a location">
-            <button type="button" class="button" id="add-new-stop">ADD NEW STOP</button>
-          </div>
-        </div>
-
-        <!-- BACK TO TOURS and DELETE TOUR -->
-        <div id="delete-tour">
-          <div class="row">
-            <div class="col-md-12">
-              <button type="submit" class="button" id='back-to-tours'>BACK TO TOURS</button>
-              <button type="submit" class="button" id='delete-tour-button'>DELETE TOUR</button>
-            </div>
-          </div> 
         </div>
 
         <!-- MODAL: CREATE A NEW STOP -->
@@ -78,7 +73,7 @@
               <div class="modal-body">
 
                 <fieldset class='form-horizontal'>
-                
+
                   <!-- Text input-->
                   <div class="form-group">
                     <label class="col-md-4 control-label" for="stopName">Stop Name</label>
@@ -106,13 +101,24 @@
 
       </div> <!-- END OF COLUMN 1 -->
 
-      <!-- COLUMN 2 -->
-      <div class="col-md-6">
-          <div id="map"></div>
+    </div> <!-- END OF ROW 2 -->
+
+    <!-- ROW 3 -->
+    <div class="row">
+
+      <!-- BACK TO TOURS and DELETE TOUR -->
+      <div id="delete-tour">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="button" id='back-to-tours'>BACK TO TOURS</button>
+            <button type="submit" class="button" id='delete-tour-button'>DELETE TOUR</button>
+          </div>
+        </div> 
       </div>
 
-    </div> <!-- END OF ROW 2 -->
+    </div> <!-- END OF ROW 3 -->
     <% include ../partials/footer %>
+    
   </div> <!-- END OF CONTAINER -->
 
 
