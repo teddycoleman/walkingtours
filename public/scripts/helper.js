@@ -122,6 +122,11 @@ function createNewStop(event){
     }
   });
 
+  //Clear out modal
+  $('.modal').find('#stopName').val('');
+  $('.modal').find('#description').val('');
+
+  //Ajax call to post new stop to DB
   $.ajax({
     method: "POST",
     url: "/api/tours/"+ tourId+ "/stops",
@@ -187,7 +192,6 @@ function updateTour(fieldsToToggle) {
 
 //Delete stop from tour
 function deleteStop(event){
-  dis = this;
   var tour_id = $(this).closest('#page').find('.tour').attr('id');
   var stop_id = $(this).closest('.stop').attr('id');
   var place_id = $(this).closest('.stop').find('input').val();
