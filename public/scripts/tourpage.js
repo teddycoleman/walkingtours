@@ -27,6 +27,7 @@ function addNewStopHandler(){
   }
   else{
     $('#stop-modal').modal();
+    $('#stop-modal').find('#stopName').val(markers[markers.length-1].name);
   }
 }
 
