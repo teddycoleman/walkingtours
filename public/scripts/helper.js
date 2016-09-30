@@ -74,6 +74,36 @@ function renderStops(stopArray){
         }
       });
   });
+
+  var fieldsToToggle = ['#stopNameId','#update-stopName',
+                      '#stopDescription','#update-stopDescription',
+                      '.edit-stop-button','.update-stop-button'];
+
+  $('.edit-stop-button').on('click', function editStop() {
+    var id = $(this).parents('.row')[0].id;
+    toggleFields(fieldsToToggle,id);
+  });
+  $('.update-stop-button').on('click', function updateStop() {
+    var id = $(this).parents('.row')[0].id;
+    toggleFields(fieldsToToggle,id);
+    var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
+    var pathname = "/api" + partialPathname +'stops/';
+    console.log("pathname:",pathname)
+    var formData = {
+      name: $('#update-stopName').val(),
+      description: $('#update-stopDescription').val(),
+      googlePlacesId: $('#place-id').val()
+    }
+    console.log("formData:",formData);
+    // $.ajax({
+    //   method: 'PUT',
+    //   url: pathname,
+    //   data: formData,
+    //   success: function() {
+    //     console.log("successfully updated!");
+    //   }
+    // });
+  });
 }
 
 // Shows specific Tour Information on Tour Page
@@ -84,10 +114,13 @@ function showTourInfo() {
     url: pathname,
     success: function(data) {
       renderTours([data]);
-      var fieldsToToggle = ['#tourName','#update-tourName','#tourAuthor','#update-tourAuthor','#tourCity','#update-tourCity','#tourDescription',
-                        '#update-tourDescription','.update-tour-button','.edit-tour-button'];
+      var fieldsToToggle = ['#tourName','#update-tourName',
+                            '#tourAuthor','#update-tourAuthor',
+                            '#tourCity','#update-tourCity',
+                            '#tourDescription', '#update-tourDescription',
+                            '.update-tour-button','.edit-tour-button'];
       $('.edit-tour-button').on('click', function() {
-        editTour(fieldsToToggle);
+        editButton(fieldsToToggle);
       });
       $('.update-tour-button').on('click', function() {
         updateTour(fieldsToToggle);
@@ -131,14 +164,21 @@ function deleteTour() {
   });
 }
 
-function toggleFields(fieldArray) {
-  fieldArray.forEach(function(field, index) {
-    $(field).toggle();
-  })
+// Helper function to toggle fields based on a input array
+function toggleFields(fieldArray,id) {
+  if(id==undefined) {
+    fieldArray.forEach(function(field, index) {
+      $(field).toggle();
+    });
+  } else {
+    fieldArray.forEach(function(field, index) {
+      $('#'+id).find(field).toggle();
+    });
+  }
 }
 
-// When Edit Tour button is pressed, toggle Fields
-function editTour(fieldsToToggle) {
+// When Edit button is pressed, toggle Fields
+function editButton(fieldsToToggle) {
   toggleFields(fieldsToToggle);
 }
 
