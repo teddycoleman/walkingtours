@@ -193,13 +193,27 @@ function updateTour(fieldsToToggle) {
     description: $('#update-tourDescription').val(),
     imageUrl: $('#tourImage').val()
   }
-  console.log("formData:",formData);
   $.ajax({
     method: 'PUT',
     url: pathname,
     data: formData,
-    success: function() {
-      console.log("successfully updated!");
-    }
+    success: updateSuccess
+  });
+}
+
+// Handles Success of Update Tour, renders updated values to Page
+function updateSuccess(data) {
+  var buttonString = " <button type='button' class='button edit-tour-button'>EDIT  TOUR</button>"
+  $('#tourName').html(data.name);
+  $('#tourCity').html('City: '+data.city);
+  $('#tourAuthor').html('Author: '+data.author);
+  $('#tourDescription').html(data.description+buttonString);
+  var fieldsToToggle = ['#tourName','#update-tourName',
+                        '#tourAuthor','#update-tourAuthor',
+                        '#tourCity','#update-tourCity',
+                        '#tourDescription', '#update-tourDescription',
+                        '.update-tour-button','.edit-tour-button'];
+  $('.edit-tour-button').on('click', function() {
+    editButton(fieldsToToggle);
   });
 }
