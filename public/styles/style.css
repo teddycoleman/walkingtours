@@ -11,13 +11,26 @@ body {
 	text-align: center;
 }
 
-.tour-container, .tour-description, .tour-info, .stop{
+.tour-container, .tour-description, .tour-info, .stop {
 	text-align: left;
 }
 
 .edit-tour-button, .update-tour-button, .update-stop-button, .edit-stop-button, .delete-stop-button {
 	float: right;
 	margin: 1%;
+	top: 90%;
+}
+
+.button-div, .tourInfo-div {
+	height: 100%;
+}
+
+.tourDescription-div {
+	height: 30vh;
+}
+
+.stop-div {
+	height: 15vh;
 }
 img {
 	width: 100%;

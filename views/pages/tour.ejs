@@ -15,15 +15,23 @@
 		<div class="container" id="tour-stops">
 			<script id="stop-template" type="text/x-handlebars-template">
 				<div class="container stop-container">
-					<div class="row stop" id={{_id}}>
-						<input type="text" id="google-place-id" value="{{googlePlacesId}}" style="display:none;">
-						<h3 id="stopNameId">{{name}}</h3>
-						<h3><input type="text" id="update-stopName" style="display:none;" value="{{name}}"></h3>
-						<p id="stopDescription">{{description}}
-							<button type="button" class="button edit-stop-button">EDIT  STOP</button>  
-							<button type="button" class="button delete-stop-button">DELETE  STOP</button></p>
-						<p><input type="text" id="update-stopDescription" style="display:none;" value="{{description}}"> 
-							<button type="button" class="button update-stop-button" style="display:none;">UPDATE  STOP</button></p>
+					<div class="row stop stop-div" id={{_id}}>
+						<div class="col-md-8 tourInfo-div">
+							<input type="text" id="google-place-id" value="{{googlePlacesId}}" style="display:none;">
+							<h3 id="stopNameId">{{name}}</h3>
+							<h3><input type="text" id="update-stopName" style="display:none;" value="{{name}}"></h3>
+							<p id="stopDescription">{{description}}</p>
+							<p><input type="text" id="update-stopDescription" style="display:none;" value="{{description}}"></p> 
+						</div>
+						<div class="col-md-4 button-div">
+							<div class="row">
+								<p><button type="button" class="button edit-stop-button">EDIT  STOP</button></p> 
+								<p><button type="button" class="button update-stop-button" style="display:none;">UPDATE  STOP</button></p>
+							</div>
+							<div class="row">
+								<p><button type="button" class="button delete-stop-button">DELETE  STOP</button></p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</script>
