@@ -49,13 +49,6 @@ function initMap() {
 
   infowindow = new google.maps.InfoWindow();
   markers = [];
-  var marker = new google.maps.Marker({
-    map: map
-  });
-
-  marker.addListener('click', function() {
-    infowindow.open(map, marker);
-  });
 
   autocomplete.addListener('place_changed', function() {
     infowindow.close();
@@ -71,14 +64,23 @@ function initMap() {
       map.setZoom(17);
     }
 
+    console.log("marker: " + place.place_id + place.geometry.location);
+    var marker = new google.maps.Marker({
+      map: map
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+
     // Set the position of the marker using the place ID and location.
     marker.setPlace({
       placeId: place.place_id,
       location: place.geometry.location
     });
     marker.setVisible(true);
+    console.log("marker: " + place.place_id + place.geometry.location);
     markers.push({placeId: place.place_id, marker: marker});
-    console.log(place);
 
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>');
     currentGooglePlacesId = place.place_id;

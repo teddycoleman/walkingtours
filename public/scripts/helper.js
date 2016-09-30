@@ -47,7 +47,7 @@ function renderStops(stopArray){
 
 
   stopArray.forEach(function (stop, index) {
-      // console.log("stop:",stop);
+      $("#pac-input").val('');  
       
       // Adds Stop Text to Page
       var stopHtml = template( stop.stop_id || stop );
