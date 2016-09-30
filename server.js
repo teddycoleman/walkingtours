@@ -120,6 +120,18 @@ app.put('/api/tours/:tour_id/stops/:stop_id', function updateStop(req, res) {
   });
 });
 
+//Delete a stop
+app.delete('/api/tours/:tour_id/stops/:stop_id', function deleteTour(req, res) {
+  db.Stop.findByIdAndRemove(req.params.stop_id, function(err, removeTour){
+    if (err) { throw(err) };
+    db.TourStop.findOneAndRemove({tour_id: req.params.tour_id , stop_id: req.params.stop_id}, function(err,removeTourStop){
+    	if (err) { throw(err) };
+    	res.json(204);
+    });
+  });
+});
+
+
 /**********
  * SERVER *
  **********/

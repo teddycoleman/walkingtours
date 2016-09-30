@@ -67,6 +67,7 @@ function renderStops(stopArray){
             map: map,
             position: place.geometry.location
           });
+          markers.push({marker: marker, placeId: request.placeId});
           google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent(place.name);
             infowindow.open(map, this);
@@ -139,6 +140,13 @@ function createNewStop(event){
     googlePlacesId: currentGooglePlacesId
   };
 
+  //Hide marker from search functionality
+  markers.forEach(function(element){  
+    if (element.placeId === currentGooglePlacesId){
+      element.marker.setMap(null);
+    }
+  });
+
   $.ajax({
     method: "POST",
     url: "/api/tours/"+ tourId+ "/stops",
@@ -146,6 +154,7 @@ function createNewStop(event){
     success: function(json){
       renderStops([json]);
       $('#stop-modal').modal('toggle');
+      map.setZoom(12);
     }
   })
 
@@ -202,4 +211,24 @@ function updateTour(fieldsToToggle) {
       console.log("successfully updated!");
     }
   });
+}
+
+//Delete stop from tour
+function deleteStop(event){
+  var tour_id = $(this).closest('#page').find('.tour').attr('id');
+  var stop_id = $(this).closest('.stop').attr('id');
+  var place_id = $(this).closest('.stop').find('#place_id').val();
+  $.ajax({
+    method: "DELETE",
+    url: "/api/tours/" + tour_id + "/stops/" + stop_id,
+    success: function(json){
+      $('#' + stop_id).remove();
+      markers.forEach(function(element){  
+        if (element.placeId === place_id){
+          element.marker.setMap(null);
+          map.setZoom(12);
+        }
+      });
+    }
+  })
 }

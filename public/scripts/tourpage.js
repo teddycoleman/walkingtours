@@ -8,6 +8,7 @@ $(document).ready(function() {
   $('#add-new-stop').on('click', addNewStopHandler);
   $('#save-stop').on('click', createNewStop);
   $('#delete-tour-button').on('click', deleteTour);
+  $('#tour-stops').on('click', '.delete-stop-button', deleteStop);
 
   //Init Google Maps API 
   initMap();
@@ -43,13 +44,10 @@ function initMap() {
   document.getElementById('add-stop').appendChild(input);
 
   infowindow = new google.maps.InfoWindow();
+  markers = [];
   var marker = new google.maps.Marker({
     map: map
   });
-
-  var request = {
-    placeId: 'ChIJnbFn3z5-j4ARoqlFeSBuvFA'
-  };
 
   marker.addListener('click', function() {
     infowindow.open(map, marker);
@@ -75,6 +73,7 @@ function initMap() {
       location: place.geometry.location
     });
     marker.setVisible(true);
+    markers.push({placeId: place.place_id, marker: marker});
     console.log(place);
 
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>');
