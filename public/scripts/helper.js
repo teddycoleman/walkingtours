@@ -75,9 +75,6 @@ function renderStops(stopArray){
         }
       });
   });
-
-  $('.edit-stop-button').on('click', editStop);
-  $('.update-stop-button').on('click', updateStop)
 }
 
 // Shows specific Tour Information on Tour Page
@@ -215,8 +212,7 @@ function updateTourSuccess(data) {
   $('#tourName').html(data.name);
   $('#tourCity').html('City: '+data.city);
   $('#tourAuthor').html('Author: '+data.author);
-  $('#tourDescription').html(data.description+buttonString);
-  addTourListeners();
+  $('#tourDescription').text(data.description);
 }
 
 // Toggles fields with EDIT STOP button is pressed
@@ -224,7 +220,7 @@ function editStop() {
   var fieldsToToggle = ['#stopNameId','#update-stopName',
                       '#stopDescription','#update-stopDescription',
                       '.edit-stop-button','.update-stop-button'];
-  var id = $(this).parents('.row')[0].id;
+  var id = $(this).closest('.stop').attr('id');
   toggleFields(fieldsToToggle,id);
 }
 
@@ -233,7 +229,7 @@ function updateStop() {
   var fieldsToToggle = ['#stopNameId','#update-stopName',
                       '#stopDescription','#update-stopDescription',
                       '.edit-stop-button','.update-stop-button'];
-  var id = $(this).parents('.row')[0].id;
+  var id = $(this).closest('.stop').attr('id');
   toggleFields(fieldsToToggle,id);
   var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
   var pathname = "/api" + partialPathname +'stops/';
@@ -253,9 +249,6 @@ function updateStop() {
 
 // When Update Stop is successful, render updated data to view
 function updateStopSuccess(data) {
-  var buttonString =  "<button type='button' class='button edit-stop-button'>EDIT  STOP</button>" +  
-                      "<button type='button' class='button delete-stop-button'>DELETE  STOP</button>"
   $('#stopNameId').html(data.name),
-  $('#stopDescription').html(data.description + buttonString);
-  $('.edit-stop-button').on('click', editStop);
+  $('#stopDescription').html(data.description);
 }

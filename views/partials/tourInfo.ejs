@@ -7,15 +7,22 @@
 					<img src="{{imageUrl}}">
 					<input type="text" id="tourImage" style="display:none;" value="{{imageUrl}}">
 				</div>
-				<div class="row tour-description">
-					<h3 id="tourName">{{name}}</h3>
-					<h3><input type="text" id="update-tourName" style="display:none;" value="{{name}}"></h3>
-					<h4 id="tourCity">City: {{city}}</h4>
-					<h4><input type="text" id="update-tourCity" style="display:none;" value="{{city}}"></h4>
-					<h4 id="tourAuthor">Author: {{author}}</h4>
-					<h4><input type="text" id="update-tourAuthor" style="display:none;" value="{{author}}"></h4>
-					<p id="tourDescription">{{description}} <button type="button" class="button edit-tour-button">EDIT  TOUR</button></p>
-					<p><input type="text" id="update-tourDescription" style="display:none;" value="{{description}}"> <button type="button" class="button update-tour-button" style="display:none;">UPDATE  TOUR</button></p>
+				<div class="row tour-description tourDescription-div">
+					<div class="col-md-8 tourInfo-div">
+						<h3 id="tourName">{{name}}</h3>
+						<h3><input type="text" id="update-tourName" style="display:none;" value="{{name}}"></h3>
+						<h4 id="tourCity">City: {{city}}</h4>
+						<h4><input type="text" id="update-tourCity" style="display:none;" value="{{city}}"></h4>
+						<h4 id="tourAuthor">Author: {{author}}</h4>
+						<h4><input type="text" id="update-tourAuthor" style="display:none;" value="{{author}}"></h4>
+						<p id="tourDescription">{{description}} </p>
+						<p><input type="text" id="update-tourDescription" style="display:none;" value="{{description}}"></p>
+					</div>
+					<div class="col-md-4 button-div">
+						<p>
+						<button type="button" class="button edit-tour-button">EDIT  TOUR</button>
+						<button type="button" class="button update-tour-button" style="display:none;">UPDATE  TOUR</button></p>
+					</div>
 				</div>
 			</div>
 		</div>

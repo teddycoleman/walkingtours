@@ -9,6 +9,8 @@ $(document).ready(function() {
   $('#save-stop').on('click', createNewStop);
   $('#delete-tour-button').on('click', deleteTour);
   $('#tour-stops').on('click', '.delete-stop-button', deleteStop);
+  $('#tour-stops').on('click', '.edit-stop-button', editStop);
+  $('#tour-stops').on('click', '.update-stop-button', updateStop);
 
   //Init Google Maps API 
   initMap();
