@@ -121,6 +121,7 @@ function createNewStop(event){
   markers.forEach(function(element){  
     if (element.placeId === currentGooglePlacesId){
       element.marker.setMap(null);
+      console.log('hidden');
     }
   });
 
@@ -133,7 +134,7 @@ function createNewStop(event){
       $('#stop-modal').modal('toggle');
       map.setZoom(12);
     }
-  })
+  });
 
 }
 
@@ -189,9 +190,10 @@ function updateTour(fieldsToToggle) {
 
 //Delete stop from tour
 function deleteStop(event){
+  dis = this;
   var tour_id = $(this).closest('#page').find('.tour').attr('id');
   var stop_id = $(this).closest('.stop').attr('id');
-  var place_id = $(this).closest('.stop').find('#place_id').val();
+  var place_id = $(this).closest('.stop').find('input').val();
   $.ajax({
     method: "DELETE",
     url: "/api/tours/" + tour_id + "/stops/" + stop_id,
@@ -204,7 +206,7 @@ function deleteStop(event){
         }
       });
     }
-  })
+  });
 }
 
 // When Update Tour is successful, render updated data to view
