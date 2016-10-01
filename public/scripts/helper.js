@@ -92,7 +92,7 @@ function showTourInfo() {
 }
 
 function addTourListeners() {
-  var fieldsToToggle = ['#tourName','#update-tourName',
+  var fieldsToToggle = ['#tourNameDisplay','#update-tourName',
                         '#tourAuthor','#update-tourAuthor',
                         '#tourCity','#update-tourCity',
                         '#tourDescription', '#update-tourDescription',
