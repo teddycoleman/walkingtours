@@ -109,20 +109,21 @@ app.put('/api/tours/:id', function updateTour(req, res) {
 });
 
 // Update a stop
-app.put('/api/tours/:tour_id/stops/', function updateStop(req, res) {
-  db.Stop.findById(req.body.stopId, function(err, updateStop){
+app.put('/api/tours/:tour_id/stops/:stop_id', function updateStop(req, res) {
+  db.Stop.findById(req.params.stop_id, function(err, updateStop){
     if (err) { throw(err) };
     updateStop.name = req.body.name;
     updateStop.description = req.body.description;
     updateStop.googlePlacesId = req.body.googlePlacesId;
     updateStop.save();
+    console.log("UpdateStop:",updateStop);  
     res.json(updateStop);
   });
 });
 
 //Delete a stop
-app.delete('/api/tours/:tour_id/stops/:stop_id', function deleteTour(req, res) {
-  db.Stop.findByIdAndRemove(req.params.stop_id, function(err, removeTour){
+app.delete('/api/tours/:tour_id/stops/:stop_id', function deleteStop(req, res) {
+  db.Stop.findByIdAndRemove(req.params.stop_id, function(err, removeStop){
     if (err) { throw(err) };
     db.TourStop.findOneAndRemove({tour_id: req.params.tour_id , stop_id: req.params.stop_id}, function(err,removeTourStop){
     	if (err) { throw(err) };
@@ -131,7 +132,12 @@ app.delete('/api/tours/:tour_id/stops/:stop_id', function deleteTour(req, res) {
   });
 });
 
-
+// Get a specific stop
+app.get('/api/tours/:tour_id/stops/:stop_id', function findStop(req, res) {
+  db.Stop.findOne({_id: req.params.stop_id}, function (err,stop){
+    res.json(stop);
+  });
+});
 /**********
  * SERVER *
  **********/

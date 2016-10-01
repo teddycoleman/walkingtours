@@ -64,7 +64,6 @@ img {
   height: 500px;
 }
 
-
 .tour-container, #map {
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;
@@ -82,6 +81,7 @@ img {
 .tour-description, .stop{
   padding: 2%;
   display: table;
+  width: 100%;
 }
 
 .tour-image, .tour-description {
@@ -102,10 +102,3 @@ img {
   height: 30vh;
 }
 
-/*div {
-  border: 1px solid green;
-}*/
-
-.show-border {
-  border: 2px solid magenta;
-}

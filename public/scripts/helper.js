@@ -15,13 +15,11 @@ function createNewTour(event){
     description: $('#description').val(),
     imageUrl: $('#image-url').val()
   };
-  console.log("I got here:",newTour)
   $.ajax({
     method: "POST",
     url: "/api/tours/",
     data: newTour,
     success: function(json){
-      console.log("json:",json);
       renderTours([json]);
       var id = json._id;
       $('#tour-modal').modal('toggle');
@@ -234,15 +232,16 @@ function updateStop() {
   var fieldsToToggle = ['#stopNameId','#update-stopName',
                       '#stopDescription','#update-stopDescription',
                       '.edit-stop-button','.update-stop-button'];
-  var id = $(this).closest('.stop').attr('id');
-  toggleFields(fieldsToToggle,id);
+  var stop_id = $(this).closest('.stop').attr('id');
+  var tour_id = $('.tour').attr('id');
+  toggleFields(fieldsToToggle,stop_id);
   var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
-  var pathname = "/api" + partialPathname +'stops/';
+  var pathname = "/api" + partialPathname +'stops/'+stop_id;
   var formData = {
-    name: $('#update-stopName').val(),
-    description: $('#update-stopDescription').val(),
-    googlePlacesId: $('#google-place-id').val(),
-    stopId: id
+    name: $('#'+stop_id).find('#update-stopName').val(),
+    description: $('#'+stop_id).find('#update-stopDescription').val(),
+    googlePlacesId: $('#'+stop_id).find('#google-place-id').val(),
+    stopId: stop_id
   }
   $.ajax({
     method: 'PUT',
@@ -254,8 +253,9 @@ function updateStop() {
 
 // When Update Stop is successful, render updated data to view
 function updateStopSuccess(data) {
-  $('#stopNameId').html(data.name),
-  $('#stopDescription').html(data.description);
+  var stop_id = data._id;
+  $('#'+stop_id).find('#stopNameId').html(data.name),
+  $('#'+stop_id).find('#stopDescription').html(data.description);
 }
 
 function backToTours(event){
@@ -263,15 +263,15 @@ function backToTours(event){
 }
 
 function highlightStop(event){
-  console.log(markers);
+  // console.log(markers);
   var self = this;
-  console.log($(self).find('#google-place-id').val());
+  // console.log($(self).find('#google-place-id').val());
 
   markers.forEach(function(element){
-    console.log(element.placeId);
+    // console.log(element.placeId);
     if(element.placeId === $(self).find('#google-place-id').val()){
       infowindow.setContent('<div><strong>' + element.name + '</strong><br>');
-      console.log(element.marker);
+      // console.log(element.marker);
       infowindow.open(map, element.marker);
     }
   });
