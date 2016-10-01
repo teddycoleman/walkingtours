@@ -64,6 +64,13 @@ img {
   height: 500px;
 }
 
+
+.tour-container, #map {
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;  
+}
+
 .tour-container {
   width: 60%;
   margin: 2% auto;
@@ -80,6 +87,7 @@ img {
 .tour-image, .tour-description {
   border-right: 2px solid black; 
   border-left: 2px solid black;
+  width: 100%;
 }
 .tour-image {
   border-top: 2px solid black;
@@ -97,3 +105,7 @@ img {
 /*div {
   border: 1px solid green;
 }*/
+
+.show-border {
+  border: 2px solid magenta;
+}

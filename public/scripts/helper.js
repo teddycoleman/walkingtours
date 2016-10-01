@@ -15,12 +15,13 @@ function createNewTour(event){
     description: $('#description').val(),
     imageUrl: $('#image-url').val()
   };
-
+  console.log("I got here:",newTour)
   $.ajax({
     method: "POST",
     url: "/api/tours/",
     data: newTour,
     success: function(json){
+      console.log("json:",json);
       renderTours([json]);
       var id = json._id;
       $('#tour-modal').modal('toggle');
@@ -91,7 +92,7 @@ function showTourInfo() {
 }
 
 function addTourListeners() {
-  var fieldsToToggle = ['#tourName','#update-tourName',
+  var fieldsToToggle = ['#tourNameDisplay','#update-tourName',
                         '#tourAuthor','#update-tourAuthor',
                         '#tourCity','#update-tourCity',
                         '#tourDescription', '#update-tourDescription',
@@ -213,7 +214,7 @@ function deleteStop(event){
 // When Update Tour is successful, render updated data to view
 function updateTourSuccess(data) {
   var buttonString = " <button type='button' class='button edit-tour-button'>EDIT  TOUR</button>"
-  $('#tourName').html(data.name);
+  $('#tourNameDisplay').html(data.name);
   $('#tourCity').html('City: '+data.city);
   $('#tourAuthor').html('Author: '+data.author);
   $('#tourDescription').text(data.description);
