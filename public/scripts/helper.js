@@ -1,3 +1,10 @@
+//Declare universal variables
+var map;
+var markers = [];
+var service;
+var infowindow;
+var currentGooglePlacesId = "";
+
 // Renders Tours to display on Page
 function renderTours(tourArray){
   var source = $('#tour-template').html();
@@ -8,6 +15,7 @@ function renderTours(tourArray){
 
 // Creates a new Tour, updates view on Page
 function createNewTour(event){
+  //Get inputs from modal
   var newTour = {
     name: $('#tourName').val(),
     author: $('#author').val(),
@@ -15,6 +23,7 @@ function createNewTour(event){
     description: $('#description').val(),
     imageUrl: $('#image-url').val()
   };
+  //Post new tour to the server
   $.ajax({
     method: "POST",
     url: "/api/tours/",
@@ -23,6 +32,7 @@ function createNewTour(event){
       renderTours([json]);
       var id = json._id;
       $('#tour-modal').modal('toggle');
+      //Take user to the newly generated tour page
       $(location).attr('href','tours/' + id)
     }
   });
@@ -32,6 +42,7 @@ function createNewTour(event){
 function showStops() {
   var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
   var pathname = "/api" + partialPathname + "stops";
+  //Request stops on tour from server and render on page
   $.ajax({
     method: "GET",
     url: pathname,
@@ -44,14 +55,12 @@ function renderStops(stopArray){
   var source = $('#stop-template').html();
   var template = Handlebars.compile(source);
 
-
   stopArray.forEach(function (stop, index) {
       $("#pac-input").val('');  
       
       // Adds Stop Text to Page
       var stopHtml = template( stop.stop_id || stop );
       $('#tour-stops').append(stopHtml);
-      // console.log("stopHtml",stopHtml);
 
       // Adds Stop Markers to Map
       var placeId = !!(stop.stop_id) ? stop.stop_id.googlePlacesId : stop.googlePlacesId;
@@ -66,11 +75,13 @@ function renderStops(stopArray){
             map: map,
             position: place.geometry.location
           });
+          //Store info in array for later use
           markers.push({marker: marker, name: place.name, placeId: request.placeId});
           google.maps.event.addListener(marker, 'click', function() {
             infowindow.setContent(place.name);
             infowindow.open(map, this);
           });
+          //Center map on the marker
           map.setCenter(marker.getPosition());
         }
       });
@@ -109,6 +120,7 @@ function addTourListeners() {
 function createNewStop(event){
   var tourId = $('.tour-container').find('.tour').attr('id');
 
+  //Get info from modal
   var newStop = {
     name: $('#stopName').val(),
     description: $('#description').val(),
@@ -182,6 +194,7 @@ function updateTour(fieldsToToggle) {
     description: $('#update-tourDescription').val(),
     imageUrl: $('#tourImage').val()
   }
+  //Update new data in the db
   $.ajax({
     method: 'PUT',
     url: pathname,
@@ -192,14 +205,17 @@ function updateTour(fieldsToToggle) {
 
 //Delete stop from tour
 function deleteStop(event){
+  //Prep url for the ajax call
   var tour_id = $(this).closest('#page').find('.tour').attr('id');
   var stop_id = $(this).closest('.stop').attr('id');
   var place_id = $(this).closest('.stop').find('input').val();
+  //Delete from the DB
   $.ajax({
     method: "DELETE",
     url: "/api/tours/" + tour_id + "/stops/" + stop_id,
     success: function(json){
       $('#' + stop_id).remove();
+      //Remove the marker from the map
       markers.forEach(function(element){  
         if (element.placeId === place_id){
           element.marker.setMap(null);
@@ -263,10 +279,9 @@ function backToTours(event){
   $(location).attr('href','/');
 }
 
+//When user hovers over the stop container, open the infoWindow on the map
 function highlightStop(event){
-  // console.log(markers);
   var self = this;
-  // console.log($(self).find('#google-place-id').val());
 
   markers.forEach(function(element){
     // console.log(element.placeId);
@@ -276,10 +291,10 @@ function highlightStop(event){
       infowindow.open(map, element.marker);
     }
   });
+
 }
 
-var currentGooglePlacesId = "";
-
+//Open modal and populate with stop name
 function addNewStopHandler(){
   if(!currentGooglePlacesId.length){
     $('#pac-input').focus();
@@ -291,7 +306,7 @@ function addNewStopHandler(){
 }
 
 
-//Refactor TODO: change this to jQuery
+//InitMap function on page load
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 37.7749, lng: -122.4194},
@@ -299,18 +314,20 @@ function initMap() {
     scrollwheel: false
   });
 
+  //Generate service to convert place_id into data for a stop
   service = new google.maps.places.PlacesService(map);
 
   var input = document.getElementById('pac-input');
 
+  //Generate autocomplete search bar for adding a stop
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 
   document.getElementById('add-stop').appendChild(input);
 
   infowindow = new google.maps.InfoWindow();
-  markers = [];
 
+  //Make autocomplete functionality
   autocomplete.addListener('place_changed', function() {
     infowindow.close();
     var place = autocomplete.getPlace();
@@ -325,7 +342,6 @@ function initMap() {
       map.setZoom(17);
     }
 
-    console.log("marker: " + place.place_id + place.geometry.location);
     var marker = new google.maps.Marker({
       map: map
     });
@@ -342,6 +358,7 @@ function initMap() {
     marker.setVisible(true);
     markers.push({placeId: place.place_id, name: place.name, marker: marker});
 
+    //Open up infowindow when selected
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>');
     currentGooglePlacesId = place.place_id;
     infowindow.open(map, marker);
