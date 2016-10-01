@@ -81,7 +81,6 @@ function initMap() {
       location: place.geometry.location
     });
     marker.setVisible(true);
-    console.log("marker: " + place.place_id + place.geometry.location);
     markers.push({placeId: place.place_id, name: place.name, marker: marker});
 
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>');

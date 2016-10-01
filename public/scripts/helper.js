@@ -71,6 +71,7 @@ function renderStops(stopArray){
             infowindow.setContent(place.name);
             infowindow.open(map, this);
           });
+          map.setCenter(marker.getPosition());
         }
       });
   });
