@@ -1,14 +1,14 @@
 <div id="walking-tours">
 	<script id="tour-template" type="text/x-handlebars-template">
 		{{#each tour}}
-		<div class="tour-container">
+		<div class="container-fluid tour-container">
 			<div class="row tour" id={{_id}}>
 				<div class="row tour-image">
 					<img src="{{imageUrl}}">
 					<input type="text" id="tourImage" style="display:none;" value="{{imageUrl}}">
 				</div>
 				<div class="row tour-description">
-					<div class="col-md-8 tourInfo-div">
+					<div class="col-sm-11 col-md-8 tourInfo-div">
 						<h3 id="tourNameDisplay">{{name}}</h3>
 						<h3><input type="text" id="update-tourName" style="display:none;" value="{{name}}"></h3>
 						<h4 id="tourCity">City: {{city}}</h4>
@@ -18,7 +18,7 @@
 						<p id="tourDescription">{{description}} </p>
 						<p><textarea id="update-tourDescription" style="display:none;" row="3" cols="20">{{description}}</textarea></p>
 					</div>
-					<div class="col-md-4 buttons-container">
+					<div class="col-sm-1 col-md-4 buttons-container">
 						<p class="buttons-div"><button type="button" class="button edit-tour-button">EDIT</button></p>
 						<p class="buttons-div"><button type="button" class="button update-tour-button" style="display:none;">UPDATE</button></p>
 					</div>
