@@ -2,8 +2,9 @@ body {
   padding-top: 20px;
 }
 
-.container {
+.container-fluid {
   font-family: 'Rambla', sans-serif;
+  width: 90%;
 }
 
 img {
@@ -12,19 +13,26 @@ img {
 }
 
 @media only screen and (max-device-width: 480px) {
-  body {
+  h1 {
+    font-size:2em;
+  }
+  h3, h4 {
     font-size: 1em;
+  }
+  body {
+    font-size: 3em;
   }
   img {
     width: 100%;
     max-height: 150px;
   }
-  .stop {
-    height: 7vh;
+  .container-fluid {
+    padding: 0px !important;
+    width: 100%;
   }
 }
 
-.container, .modal-footer, .tour-title-page, #add-stop {
+.container-fluid, .modal-footer, .tour-title-page, #add-stop {
   text-align: center;
 }
 
