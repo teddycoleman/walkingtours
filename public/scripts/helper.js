@@ -77,7 +77,7 @@ function renderStops(stopArray){
           });
           //Store info in array for later use
           markers.push({marker: marker, name: place.name, placeId: request.placeId});
-          google.maps.event.addListener(marker, 'click', function() {
+          google.maps.event.addListener(marker, 'touchstart click', function() {
             infowindow.setContent(place.name);
             infowindow.open(map, this);
           });
@@ -108,10 +108,10 @@ function addTourListeners() {
                         '#tourCity','#update-tourCity',
                         '#tourDescription', '#update-tourDescription',
                         '.update-tour-button','.edit-tour-button'];
-  $('.edit-tour-button').on('click', function() {
+  $('.edit-tour-button').on('touchstart click', function() {
     editButton(fieldsToToggle);
   });
-  $('.update-tour-button').on('click', function() {
+  $('.update-tour-button').on('touchstart click', function() {
     updateTour(fieldsToToggle);
   });
 }
@@ -346,7 +346,7 @@ function initMap() {
       map: map
     });
 
-    marker.addListener('click', function() {
+    marker.addListener('touchstart click', function() {
       infowindow.open(map, marker);
     });
 

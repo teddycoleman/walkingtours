@@ -69,14 +69,14 @@ img {
   background-color: black;
   color: white;
   border: 0px;
-  padding: 5px;
+  padding: 10px;
 }
 
 .button:hover {
   background-color: gray;
   color: white;
   border: 0px;
-  padding: 5px;
+  padding: 10px;
 }
 
 .buttons-div {

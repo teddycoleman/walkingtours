@@ -11,14 +11,14 @@ $(document).ready(function() {
     }
   });
 
-  $('#create-new-tour').on('click',function(){
+  $('#create-new-tour').on('touchstart click',function(){
     $('#tour-modal').modal();
   });
 
-  $('#save-tour').on('click', createNewTour);
+  $('#save-tour').on('touchstart click', createNewTour);
 
-  $('.container-fluid').on('click','.tour', function(){
-    console.log("clicked");
+  $('.container-fluid').on('touchstart click','.tour', function(){
+    // console.log("clicked");
     var id = $(this).closest('.tour').attr('id');
     $(location).attr('href','tours/' + id);
   });

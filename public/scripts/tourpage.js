@@ -5,13 +5,13 @@ $(document).ready(function() {
   showStops();
 
   // Event Listeners for Buttons on Page
-  $('#add-new-stop').on('click', addNewStopHandler);
-  $('#save-stop').on('click', createNewStop);
-  $('#back-to-tours').on('click', backToTours);
-  $('#delete-tour-button').on('click', deleteTour);
-  $('#tour-stops').on('click', '.delete-stop-button', deleteStop);
-  $('#tour-stops').on('click', '.edit-stop-button', editStop);
-  $('#tour-stops').on('click', '.update-stop-button', updateStop);
+  $('#add-new-stop').on('touchstart click', addNewStopHandler);
+  $('#save-stop').on('touchstart click', createNewStop);
+  $('#back-to-tours').on('touchstart click', backToTours);
+  $('#delete-tour-button').on('touchstart click', deleteTour);
+  $('#tour-stops').on('touchstart click', '.delete-stop-button', deleteStop);
+  $('#tour-stops').on('touchstart click', '.edit-stop-button', editStop);
+  $('#tour-stops').on('touchstart click', '.update-stop-button', updateStop);
   $('.container-fluid').on('mouseenter','.stop', highlightStop);
 
   //Init Google Maps API 
