@@ -23,6 +23,7 @@ img {
   }
   h3, h4 {
     font-size: 1em;
+    text-decoration: underline;
   }
   body {
     font-size: 3em;
@@ -34,6 +35,11 @@ img {
   .container-fluid {
     padding: 0px !important;
     width: 100%;
+  }
+  #map {
+    height: 40vh;
+    min-height: 40vh;
+    padding-left: 2%;
   }
 }
 
@@ -83,14 +89,14 @@ img {
   height: 500px;
 }
 
-.tour-container, #map {
+.tour-description, #map {
   -webkit-box-shadow: 0 10px 6px -6px #777;
   -moz-box-shadow: 0 10px 6px -6px #777;
   box-shadow: 0 10px 6px -6px #777;  
 }
 
 .tour-container {
-  width: 60%;
+  width: 70%;
   margin: 2% auto;
 }
 
@@ -120,4 +126,3 @@ img {
 #tour-title {
   height: 30vh;
 }
-

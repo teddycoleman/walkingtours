@@ -7,7 +7,7 @@ var sampleTours = [{
   name: "Ferry Building and Filbert Steps", 
   author: "Lily Cole", 
   city: "San Francisco", 
-  description: "Enjoy the bustling marketplace of the SF Ferry Building and wander through the local businesses and eateries. Journey up the steep but beautiful Filbert Steps home of the famous stairway gardens. Soak up the spectacular views atop of Telegraph Hill at Coit Tower. Finally, stroll down to SF's Little Italy (North Beach) for great food, dining and people-watching!",
+  description: "Journey from the bustling Ferry Building up the Filbert Steps to Coit Tower and back down to historic North Beach for great food, dining and people-watching!",
   imageUrl: "http://i.imgur.com/zJasBoN.jpg"
 },
 {
@@ -16,6 +16,13 @@ var sampleTours = [{
   city: "San Francisco", 
   description: "Start your tour marveling at the beauty of the famous Golden Gate Bridge the wind your way down the Coastal Trail past a SF's breathtaking beaches, through Land's End and end at the historical Sutro Baths.",
   imageUrl: "http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/site-photo.jpg"
+},
+{
+  name: "Haight and Heights",
+  author: "Cole and Coleman",
+  city: "San Francisco",
+  description: "Hippies, hiking, and SF history is all included on this city walk!",
+  imageUrl: "https://static1.squarespace.com/static/5257119ee4b0d94e6ffa1641/5526e83ee4b0f620d0c7a39d/5526e898e4b0f3861cdda410/1428613277709/04HaightToHeights-HaightVictorians.jpg"
 },
 {
   name: "Puppy Playtime",
@@ -89,6 +96,38 @@ var bridgeBeachesStops = [
   googlePlacesId: "ChIJ7dtznbWHhYAR81fEwzi58F4"
 }];
 
+var haightHeightsStops = [
+ {
+  name: "Decades Of Fashion",
+  description: "Relive the fashion of the Summer of Love with authentic vintage duds!",
+  googlePlacesId: "ChIJwcCmSlKHhYARdN4Ikve1FaI"
+},
+{
+  name: "Ben & Jerry's",
+  description: "Located on this iconic corner, get that postcard photo and a tasty treat at the same time.",
+  googlePlacesId: "ChIJsbMzM1OHhYAR-htwK_E89Ro"
+},
+ {
+  name: "Piedmont Boutique",
+  description: "Your one-stop costume shop with all clothing made in-house. So fabulous you have to see it to believe it!",
+  googlePlacesId: "ChIJwW2UzqyAhYARLN-vF230nsE"
+},
+ {
+  name: "Buena Vista Park",
+  description: "Hike this peaceful green hilltop to get fantastic views of the city.",
+  googlePlacesId: "ChIJc-fv16uAhYARQNxL3WZRYHw"
+},
+ {
+  name: "Corona Heights Park",
+  description: "Summit one last peak for a view that you will never forget. We promise; it's worth it.",
+  googlePlacesId: "ChIJX3DWQgJ-j4ARxWqSTDOy_CU"
+},
+ {
+  name: "Hot Cookie",
+  description: "Now that you've reached the Castro and topped two sizable hills, reward yourself with a fresh-based cookie.",
+  googlePlacesId: "ChIJnRGRVht-j4AR8meAbWNMBFw"
+}];
+
 var puppyPlaytimeStops = [
  {
   name: "Corona Heights Park",
@@ -130,7 +169,7 @@ db.Tour.create(sampleTours, function(err, tours){
         ord_num: i
       });
     }
-
+    // end ferry
     db.Stop.create(bridgeBeachesStops, function(err, stops){
       if (err) { return console.log('ERROR', err); }
 
@@ -141,22 +180,35 @@ db.Tour.create(sampleTours, function(err, tours){
           ord_num: i
         });
       }
-
-      db.Stop.create(puppyPlaytimeStops, function(err, stops){
+      // end bridge
+      db.Stop.create(haightHeightsStops, function(err, stops){
         if (err) { return console.log('ERROR', err); }
 
-        for (i = 0; i < 4; i++){
+        for (i = 0; i < 6; i++){
           tourStops.push({
-            tour_id: tours[2]._id, //tours[2] = Puppy Playtime
+            tour_id: tours[2]._id, //tours[2] = Haight to Heights
             stop_id: stops[i]._id,
             ord_num: i
           });
         }
-        db.TourStop.create(tourStops, function(err, stops){
-          if (err) { return console.log('ERROR', err); }
-        });
-      });
-    });
-  });
+        // end haight
+        db.Stop.create(puppyPlaytimeStops, function(err, stops){
+        if (err) { return console.log('ERROR', err); }
+
+        for (i = 0; i < 4; i++){
+          tourStops.push({
+            tour_id: tours[3]._id, //tours[3] = Puppy Playtime
+            stop_id: stops[i]._id,
+            ord_num: i
+          });
+        }
+        // end puppy
+          db.TourStop.create(tourStops, function(err, stops){
+            if (err) { return console.log('ERROR', err); }
+          });
+        }); //end puppy
+      }); //end haight
+    }); //end beaches
+  }); //end ferry
 
 });
