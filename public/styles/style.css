@@ -7,6 +7,11 @@ body {
   width: 90%;
 }
 
+h1{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 48px;
+}
+
 img {
   width: 100%;
   height: 30vh; 
@@ -45,9 +50,15 @@ img {
   margin: 2%;
 }
 
+.edit-stop-button,.delete-stop-button,.update-stop-button {
+  background-color: white !important;
+  color: black !important;
+}
+
 #add-stops, #delete-tour {
   padding: 5%;
 }
+
 .button {
   background-color: black;
   color: white;
