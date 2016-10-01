@@ -89,6 +89,7 @@ function showTourInfo() {
   }); 
 }
 
+// Add Listeners for Tour Edit and Update buttons
 function addTourListeners() {
   var fieldsToToggle = ['#tourNameDisplay','#update-tourName',
                         '#tourAuthor','#update-tourAuthor',
@@ -136,7 +137,6 @@ function createNewStop(event){
       map.setZoom(12);
     }
   });
-
 }
 
 // Deletes Tour from database and redirects user back to HomePage

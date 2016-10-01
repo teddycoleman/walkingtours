@@ -42,6 +42,28 @@ app.get('/tours/:id', function(req,res){
  * JSON endpoints
  */
 
+// '/api' API Endpoints
+app.get('/api', function api_index(req, res) {
+  res.json({
+    message: "Here is the documentation for our Walking Tour Application",
+    documentationUrl: "README.md", // Change this
+    baseUrl: "", // Change this
+    endpoints: [
+      {method: "GET", path: "/api", description: "Describes all available endpoints"},
+      {method: "GET", path: "/api/tours", description: "JSON for all tours"}, 
+      {method: "GET", path: "/api/tours/:tour_id", description: "JSON info for one specific tour"}, 
+      {method: "POST", path: "/api/tours", description: "Create a new tour"},
+      {method: "PUT", path: "/api/tours/:tour_id", description: "Update a tour"},
+      {method: "DELETE", path: "/api/tours/:tour_id", description: "Delete a tour"}, 
+      {method: "GET", path: "/api/tours/:tour_id/stops", description: "JSON for all stops in a tour"},
+      {method: "GET", path: "/api/tours/:tour_id/stops/:stop_id", description: "Get a specific stop"},
+      {method: "POST", path: "/api/tours/:tour_id/stops", description: "Create a new stop"}, 
+      {method: "PUT", path: "/api/tours/:tour_id/stops/:stop_id", description: "Update a stop"},
+      {method: "DELETE", path: "/api/tours/:tour_id/stops/:stop_id", description: "Delete a stop"}
+    ]
+  })
+});
+
 //Get JSON for all tours
 app.get('/api/tours/', function(req,res){
 	db.Tour.find(function getAllTours(err,tours){
@@ -50,53 +72,22 @@ app.get('/api/tours/', function(req,res){
 });
 
 //Get info for one specific tour
-app.get('/api/tours/:id', function(req,res){
-	db.Tour.findOne({_id: req.params.id}, function getOneTours(err,tour){
+app.get('/api/tours/:tour_id', function(req,res){
+	db.Tour.findOne({_id: req.params.tour_id}, function getOneTours(err,tour){
 		res.json(tour);
 	});
 });
 
-//Get all stops for a tour
-app.get('/api/tours/:id/stops', function(req,res){
-	db.TourStop.find({tour_id: req.params.id}).populate('stop_id').exec(function(err,tourStop){
-		if(err){throw err;}
-		res.send(tourStop);
-	});
-});
-
-//Create new stop
-app.post('/api/tours/:id/stops', function(req,res){
-	var newStop = new db.Stop(req.body);
-	newStop.save(function(err,stop){
-		if (err){throw err};
-		var tourStop = new db.TourStop({
-			tour_id: req.params.id,
-			stop_id: stop._id
-		});
-		tourStop.save();
-		res.json(newStop);
-	});
-
-});
-
 //Create new tour
 app.post('/api/tours', function(req,res){
-	var newTour = new db.Tour(req.body);
-	newTour.save();
-	res.send(newTour);
-});
-
-// Delete a tour
-app.delete('/api/tours/:id', function deleteTour(req, res) {
-  db.Tour.findByIdAndRemove(req.params.id, function(err, removeTour){
-    if (err) { throw(err) };
-    res.json(removeTour);
-  });
+  var newTour = new db.Tour(req.body);
+  newTour.save();
+  res.send(newTour);
 });
 
 // Update a tour
-app.put('/api/tours/:id', function updateTour(req, res) {
-  db.Tour.findById(req.params.id, function(err, updateTour){
+app.put('/api/tours/:tour_id', function updateTour(req, res) {
+  db.Tour.findById(req.params.tour_id, function(err, updateTour){
     if (err) { throw(err) };
     updateTour.name = req.body.name;
     updateTour.author = req.body.author;
@@ -106,6 +97,44 @@ app.put('/api/tours/:id', function updateTour(req, res) {
     updateTour.save();
     res.json(updateTour);
   });
+});
+
+// Delete a tour
+app.delete('/api/tours/:tour_id', function deleteTour(req, res) {
+  db.Tour.findByIdAndRemove(req.params.tour_id, function(err, removeTour){
+    if (err) { throw(err) };
+    res.json(removeTour);
+  });
+});
+
+// Get all stops for a tour
+app.get('/api/tours/:tour_id/stops', function(req,res){
+	db.TourStop.find({tour_id: req.params.tour_id}).populate('stop_id').exec(function(err,tourStop){
+		if(err){throw err;}
+		res.send(tourStop);
+	});
+});
+
+// Get a specific stop
+app.get('/api/tours/:tour_id/stops/:stop_id', function findStop(req, res) {
+  db.Stop.findOne({_id: req.params.stop_id}, function (err,stop){
+    res.json(stop);
+  });
+});
+
+//Create new stop
+app.post('/api/tours/:tour_id/stops', function(req,res){
+	var newStop = new db.Stop(req.body);
+	newStop.save(function(err,stop){
+		if (err){throw err};
+		var tourStop = new db.TourStop({
+			tour_id: req.params.tour_id,
+			stop_id: stop._id
+		});
+		tourStop.save();
+		res.json(newStop);
+	});
+
 });
 
 // Update a stop
@@ -132,12 +161,7 @@ app.delete('/api/tours/:tour_id/stops/:stop_id', function deleteStop(req, res) {
   });
 });
 
-// Get a specific stop
-app.get('/api/tours/:tour_id/stops/:stop_id', function findStop(req, res) {
-  db.Stop.findOne({_id: req.params.stop_id}, function (err,stop){
-    res.json(stop);
-  });
-});
+
 /**********
  * SERVER *
  **********/
