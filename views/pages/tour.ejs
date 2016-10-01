@@ -43,18 +43,18 @@
           <script id="stop-template" type="text/x-handlebars-template">
               <div class="row stop" id={{_id}}>
 
-                  <div class="col-md-8 tourInfo-div">
+                  <div class="col-sm-4 col-md-8 tourInfo-div">
                     <input type="text" id="google-place-id" value="{{googlePlacesId}}" style="display:none;">
                     <h3 id="stopNameId">{{name}}</h3>
                     <h3><input type="text" id="update-stopName" style="display:none;" value="{{name}}"></h3>
                     <p id="stopDescription">{{description}}</p>
                     <p><textarea id="update-stopDescription" row="3" cols="20" style="display:none;">{{description}}</textarea></p> 
                   </div>
-                  <div class="col-md-2 buttons-container">
+                  <div class="col-sm-1 col-md-2 buttons-container">
                     <p><button type="button" class="button edit-stop-button">EDIT</button></p> 
                     <p><button type="button" class="button update-stop-button" style="display:none;">UPDATE</button></p>
                   </div>
-                  <div class="col-md-2 buttons-container">
+                  <div class="col-sm-1 col-md-2 buttons-container">
                     <p><button type="button" class="button delete-stop-button">DELETE</button></p>
                   </div>
 
@@ -117,6 +117,8 @@
       </div>
 
     </div> <!-- END OF ROW 3 -->
+
+    <!-- FOOTER -->
     <% include ../partials/footer %>
     
   </div> <!-- END OF CONTAINER -->
