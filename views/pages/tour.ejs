@@ -49,7 +49,6 @@
         <div id="tour-stops">
           <script id="stop-template" type="text/x-handlebars-template">
               <div class="row stop" id={{_id}}>
-
                   <div class="col-sm-8 col-md-8 tourInfo-div">
                     <input type="text" id="google-place-id" value="{{googlePlacesId}}" style="display:none;">
                     <h3 id="stopNameId">{{name}}</h3>
@@ -62,15 +61,14 @@
                         <span class="glyphicon glyphicon-pencil"></span>
                       </button>
                     </p> 
-                    <p><button type="button" class="button update-stop-button" style="display:none;">UPDATE</button></p>
+                    <p><button type="submit" class="button update-stop-button" style="display:none;">UPDATE</button></p>
                   </div>
                   <div class="col-sm-1 col-md-2 buttons-container">
                     <p><button type="button" class="button delete-stop-button">
-                        <span class="glyphicon glyphicon-trash">
+                        <span class="glyphicon glyphicon-trash"></span>
                       </button>
                     </p>
                   </div>
-
               </div>
           </script>
         </div>
