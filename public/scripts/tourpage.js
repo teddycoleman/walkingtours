@@ -13,6 +13,7 @@ $(document).ready(function() {
   $('#tour-stops').on('touchstart click', '.edit-stop-button', editStop);
   $('#tour-stops').on('touchstart click', '.update-stop-button', updateStop);
   $('.container-fluid').on('mouseenter','.stop', highlightStop);
+  $('.title').on('click',backToTours);
 
   //Init Google Maps API 
   initMap();
