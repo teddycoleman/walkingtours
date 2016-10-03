@@ -15,6 +15,7 @@ $(document).ready(function() {
   $('.container-fluid').on('mouseenter','.stop', highlightStop);
   $('.title').on('click',backToTours);
 
+
   //Init Google Maps API 
   initMap();
 

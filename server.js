@@ -46,8 +46,8 @@ app.get('/tours/:id', function(req,res){
 app.get('/api', function api_index(req, res) {
   res.json({
     message: "Here is the documentation for our Walking Tour Application",
-    documentationUrl: "README.md", // Change this
-    baseUrl: "", // Change this
+    documentationUrl: "README.md", 
+    baseUrl: "https://city-hyke.herokuapp.com/", 
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/tours", description: "JSON for all tours"}, 
