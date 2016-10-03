@@ -27,7 +27,7 @@ app.use(express.static('public'));
  */
 
 //Get homepage
-app.get('/', function(req,res){
+app.get(['/', '/tours'], function(req,res){
 	res.render(__dirname + '/views/pages/index');
 });
 
