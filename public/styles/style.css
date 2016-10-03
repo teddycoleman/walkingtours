@@ -98,6 +98,7 @@ img {
 .tour-container {
   width: 70%;
   margin: 2% auto;
+  cursor: pointer;
 }
 
 .tour-description {
