@@ -61,6 +61,10 @@ img {
   color: black !important;
 }
 
+.tour-container, .title{
+  cursor: pointer;
+}
+
 #add-stops, #delete-tour {
   padding: 5%;
 }
@@ -98,7 +102,6 @@ img {
 .tour-container {
   width: 70%;
   margin: 2% auto;
-  cursor: pointer;
 }
 
 .tour-description {
