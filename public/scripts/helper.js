@@ -246,7 +246,8 @@ function editStop() {
 }
 
 // Toggles fields and sends data to db when UPDATE STOP is pressed
-function updateStop() {
+function updateStop(event) {
+  event.preventDefault();
   var fieldsToToggle = ['#stopNameId','#update-stopName',
                       '#stopDescription','#update-stopDescription',
                       '.edit-stop-button','.update-stop-button'];
