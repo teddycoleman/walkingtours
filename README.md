@@ -7,14 +7,14 @@ City Hyke allows users to create walking tours and share them with others! Ever 
 
 ##Technologies Used
 
-jQuery
-Javascript
-HTML
-EJS
-CSS
-Handlebars
-Google Maps API
-Google Places API
+- jQuery
+- Javascript
+- HTML
+- EJS
+- CSS
+- Handlebars
+- Google Maps API
+- Google Places API
 
 ##Code We're Proud Of 
 We used EJS for templating.  Here's a very simple example: 
@@ -42,3 +42,7 @@ We used our mobile wireframes to embrace the "Mobile First" best practice in mod
 <img src="http://i.imgur.com/auPK2kI.jpg" height="300px" alt="Home Page">
 
 <img src="http://i.imgur.com/kRIMDB8.jpg" height="300px" alt="Tour Page">
+
+At the same time, we kept in mind that we wanted the map and tour stops to be visible side-by-side on the desktop version.
+
+<img src="http://i.imgur.com/4OubuHT.jpg" width="300px" alt="Tour Page - Desktop"> 
