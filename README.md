@@ -1,10 +1,11 @@
-# walkingtours
+# CITY HYKE 
+##Walking Tours of Your City
 
-CITY HYKE - walking tours of your city
+City Hyke allows users to create walking tours and share them with others! Ever found yourself in a new city and not know where to go? Look on City Hyke for suggestions! 
 
-City Hyke allows users to create walking tours and share them with others! Ever found yourself in a new city and not know where to go? Look on City Hyke for suggestions! https://city-hyke.herokuapp.com/
+[https://city-hyke.herokuapp.com/](https://city-hyke.herokuapp.com/)
 
-Technologies Used
+##Technologies Used
 
 jQuery
 Javascript
@@ -15,13 +16,17 @@ Handlebars
 Google Maps API
 Google Places API
 
-Code I'm Proud Of - using EJS for templating.  Here's a very simple example: 
+##Code We're Proud Of 
+We used EJS for templating.  Here's a very simple example: 
 
 
-<!-- tour.ejs/index.ejs -->
+<strong>In tour.ejs/index.ejs</strong>
+```
 <% include ../partials/footer %>
+```
 
-<!-- footer.ejs -->
+<strong>In footer.ejs</strong>
+```
 <footer>
 	<div class="row">
 		<div class="col-md-12">
@@ -29,4 +34,11 @@ Code I'm Proud Of - using EJS for templating.  Here's a very simple example:
 		</div>
 	</div>
 </footer>
+```
 
+##Screenshots
+We used our mobile wireframes to embrace the "Mobile First" best practice in modeling the layout of our site.
+
+<img src="http://i.imgur.com/auPK2kI.jpg" height="300px" alt="Home Page">
+
+<img src="http://i.imgur.com/kRIMDB8.jpg" height="300px" alt="Tour Page">
