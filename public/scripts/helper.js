@@ -15,6 +15,7 @@ function renderTours(tourArray){
 
 // Creates a new Tour, updates view on Page
 function createNewTour(event){
+  event.preventDefault();
   //Get inputs from modal
   var newTour = {
     name: $('#tourName').val(),

@@ -83,31 +83,33 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Create New Stop</h4>
               </div>
-              <div class="modal-body">
+              <form>
+                <div class="modal-body">
 
-                <fieldset class='form-horizontal'>
+                  <fieldset class='form-horizontal'>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="stopName">Stop Name</label>
-                    <div class="col-md-4">
-                      <input id="stopName" name="stopName" type="text" required="">
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="stopName">Stop Name</label>
+                      <div class="col-md-4">
+                        <input id="stopName" name="stopName" type="text" required="">
+                      </div>
                     </div>
-                  </div>
 
-                  <!-- Text input-->
-                  <div class="form-group">
-                    <label class="col-md-4 control-label" for="description">Description</label>
-                    <div class="col-md-4">
-                      <input id="description" name="description" type="text">
+                    <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="description">Description</label>
+                      <div class="col-md-4">
+                        <input id="description" name="description" type="text">
+                      </div>
                     </div>
-                  </div>
-                </fieldset>
+                  </fieldset>
 
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="button" id="save-stop">SAVE</button>
-              </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="button" id="save-stop">SAVE</button>
+                </div>
+              </form>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->

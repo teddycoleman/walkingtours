@@ -30,54 +30,54 @@
 	            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	            <h4 class="modal-title">Create New Tour</h4>
 	          </div>
-	          <div class="modal-body">
+	          <form>
+		          <div class="modal-body">
+		            <fieldset class='form-horizontal'>
+		              <!-- Text input-->
+		              <div class="form-group">
+		                <label class="col-md-4 control-label" for="tourName">Tour Name</label>
+		                <div class="col-md-4">
+		                  <input id="tourName" name="tourName" type="text" required="">
+		                </div>
+		              </div>
 
-	            <fieldset class='form-horizontal'>
-	              <!-- Text input-->
-	              <div class="form-group">
-	                <label class="col-md-4 control-label" for="tourName">Tour Name</label>
-	                <div class="col-md-4">
-	                  <input id="tourName" name="tourName" type="text" required="">
-	                </div>
-	              </div>
+		              <!-- Text input-->
+		              <div class="form-group">
+		                <label class="col-md-4 control-label" for="author">Author</label>
+		                <div class="col-md-4">
+		                  <input id="author" name="author" type="text">
+		                </div>
+		              </div>
 
-	              <!-- Text input-->
-	              <div class="form-group">
-	                <label class="col-md-4 control-label" for="author">Author</label>
-	                <div class="col-md-4">
-	                  <input id="author" name="author" type="text">
-	                </div>
-	              </div>
+					 <!-- Text input-->
+		              <div class="form-group">
+		                <label class="col-md-4 control-label" for="city">City</label>
+		                <div class="col-md-4">
+		                  <input id="city" name="city" type="text">
+		                </div>
+		              </div>
 
-				 <!-- Text input-->
-	              <div class="form-group">
-	                <label class="col-md-4 control-label" for="city">City</label>
-	                <div class="col-md-4">
-	                  <input id="city" name="city" type="text">
-	                </div>
-	              </div>
+					 <!-- Text input-->
+		              <div class="form-group">
+		                <label class="col-md-4 control-label" for="description">Description</label>
+		                <div class="col-md-4">
+		                  <input id="description" name="description" type="text">
+		                </div>
+		              </div>
 
-				 <!-- Text input-->
-	              <div class="form-group">
-	                <label class="col-md-4 control-label" for="description">Description</label>
-	                <div class="col-md-4">
-	                  <input id="description" name="description" type="text">
-	                </div>
-	              </div>
-
-				 <!-- Text input-->
-	              <div class="form-group">
-	                <label class="col-md-4 control-label" for="image-url">Image Url</label>
-	                <div class="col-md-4">
-	                  <input id="image-url" name="image-url" type="text">
-	                </div>
-	              </div>
-	            </fieldset>
-
-	          </div>
-	          <div class="modal-footer">
-	            <button type="button" class="button" id="save-tour">SAVE</button>
-	          </div>
+					 <!-- Text input-->
+		              <div class="form-group">
+		                <label class="col-md-4 control-label" for="image-url">Image Url</label>
+		                <div class="col-md-4">
+		                  <input id="image-url" name="image-url" type="text">
+		                </div>
+		              </div>
+		            </fieldset>
+		          </div>
+		          <div class="modal-footer">
+		            <button type="submit" class="button" id="save-tour">SAVE</button>
+		          </div>
+		   	  </form>
 	        </div><!-- /.modal-content -->
 	      </div><!-- /.modal-dialog -->
 	    </div><!-- /.modal -->
