@@ -97,6 +97,7 @@ function showTourInfo() {
     success: function(data) {
       renderTours([data]);
       addTourListeners();
+      $('.tour-container').css('cursor','auto');
     }
   }); 
 }
@@ -131,7 +132,6 @@ function createNewStop(event){
   markers.forEach(function(element){  
     if (element.placeId === currentGooglePlacesId){
       element.marker.setMap(null);
-      console.log('hidden');
     }
   });
 
@@ -148,6 +148,7 @@ function createNewStop(event){
       renderStops([json]);
       $('#stop-modal').modal('toggle');
       map.setZoom(12);
+      $(location).attr('href', $(location).attr('pathname')+ '#' + json._id)
     }
   });
 }
