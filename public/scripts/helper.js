@@ -7,6 +7,10 @@ var currentGooglePlace = {};
 var directionsService;
 var directionsDisplay;
 
+/*
+ * Functions for rendering TOUR on page (some shared by both pages)
+ */ 
+
 // Renders Tours to display on Page
 function renderTours(tourArray){
   var source = $('#tour-template').html();
@@ -41,63 +45,6 @@ function createNewTour(event){
   });
 }
 
-// Shows Stops by grabbing from database
-function showStops() {
-  var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
-  var pathname = "/api" + partialPathname + "stops";
-  //Request stops on tour from server and render on page
-  $.ajax({
-    method: "GET",
-    url: pathname,
-    success: renderStops
-  });  
-}
-
-// Renders Stops to display on the Page - Text and on Map
-function renderStops(stopArray){
-  var source = $('#stop-template').html();
-  var template = Handlebars.compile(source);
-
-  stopArray.forEach(function (stop, index) {
-      $("#pac-input").val('');  
-      
-      // Adds Stop Text to Page
-      var stopHtml = template( stop.stop_id || stop );
-      $('#tour-stops').append(stopHtml);
-
-      // Adds Stop Markers to Map
-      var placeId = !!(stop.stop_id) ? stop.stop_id.googlePlacesId : stop.googlePlacesId;
-      // Use placeId for the request
-      var request = {
-        placeId: placeId
-      }
-
-      // Use service to grab info for the placeId and put on the map
-      service.getDetails(request, function(place, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-          //Store info in array for later use
-          var markersIndex = stopArray.length > 1 ? index : markers.length;
-          markers.push({marker: marker, name: place.name, placeId: request.placeId, order: markersIndex});
-          google.maps.event.addListener(marker, 'touchstart click', function() {
-            infowindow.setContent(place.name);
-            infowindow.open(map, this);
-          });
-          //Center map on the marker
-          map.setCenter(marker.getPosition());
-
-          if(markers.length >= stopArray.length){
-            showRoute();
-          }  
-        }
-      });
-  });
-
-}
-
 // Shows specific Tour Information on Tour Page
 function showTourInfo() {
   var pathname = "/api" + $(location).attr('pathname');
@@ -124,6 +71,71 @@ function addTourListeners() {
   });
   $('.update-tour-button').on('touchstart click', function() {
     updateTour(fieldsToToggle);
+  });
+}
+
+/*
+ * Functions for STOPS on tourpage 
+ */ 
+
+// Shows Stops by grabbing from database
+function showStops() {
+  var partialPathname = $(location).attr('pathname').replace(/\/$/, "") + '/';
+  var pathname = "/api" + partialPathname + "stops";
+  //Request stops on tour from server and render on page
+  $.ajax({
+    method: "GET",
+    url: pathname,
+    success: renderStops
+  });  
+}
+
+// Renders Stops to display on the Page - Text and on Map
+function renderStops(stopArray){
+  //Initialize handlebars
+  var source = $('#stop-template').html();
+  var template = Handlebars.compile(source);
+
+  stopArray.forEach(function (stop, index) {
+      $("#pac-input").val('');  
+      
+      // Adds Stop Text to Page
+      var stopHtml = template( stop.stop_id || stop );
+      $('#tour-stops').append(stopHtml);
+
+      // Adds Stop Markers to Map
+      var placeId = !!(stop.stop_id) ? stop.stop_id.googlePlacesId : stop.googlePlacesId;
+      // Use placeId for the request
+      var request = {
+        placeId: placeId
+      }
+
+      // Use Google service to grab info for the placeId and put on the map
+      service.getDetails(request, function(place, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+
+          //Store info in array for later use
+          var markersIndex = stopArray.length > 1 ? index : markers.length;
+          markers.push({marker: marker, name: place.name, placeId: request.placeId, order: markersIndex});
+
+          //Add markers to the map
+          google.maps.event.addListener(marker, 'touchstart click', function() {
+            infowindow.setContent(place.name);
+            infowindow.open(map, this);
+          });
+          //Center map on the marker
+          map.setCenter(marker.getPosition());
+
+          //Render route only if the last marker has been placed on the map
+          if(markers.length >= stopArray.length){
+            showRoute();
+          }  
+        }
+      });
   });
 }
 
@@ -236,9 +248,30 @@ function deleteStop(event){
         }
       });
       markers.splice(eliminate,1);
+      markers = orderArray(markers);
       showRoute();
     }
   });
+}
+
+//Helper function to ensure all elements in the array are ordered properly
+function orderArray(array){
+  var newArray = [];
+  for(i = 0; i < array.length; i++){
+    if (array[i].order === i){
+      newArray.push(array[i]);
+    }
+    else{
+      var newElement = {
+        marker: array[i].marker, 
+        name: array[i].name, 
+        placeId: array[i].placeId, 
+        order: i
+      }
+      newArray.push(newElement);
+    }
+  }
+  return newArray;
 }
 
 // When Update Tour is successful, render updated data to view
@@ -320,32 +353,35 @@ function addNewStopHandler(){
   }
 }
 
+/*
+ * Google maps functions 
+ */ 
 
 //InitMap function on page load
 function initMap() { 
-  directionsService = new google.maps.DirectionsService;
-  directionsDisplay = new google.maps.DirectionsRenderer;
-
+  //Initialize map 
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 37.7749, lng: -122.4194},
     zoom: 12,
     scrollwheel: false
   });
 
+  //Initialize Google directions services
+  directionsService = new google.maps.DirectionsService;
+  directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
   directionsDisplay.setOptions( { suppressMarkers: true } );
 
   //Generate service to convert place_id into data for a stop
   service = new google.maps.places.PlacesService(map);
 
-  var input = document.getElementById('pac-input');
-
   //Generate autocomplete search bar for adding a stop
+  var input = document.getElementById('pac-input');
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
-
   document.getElementById('add-stop').appendChild(input);
 
+  //Initialize infowindow
   infowindow = new google.maps.InfoWindow();
 
   //Make autocomplete functionality
@@ -387,6 +423,7 @@ function initMap() {
   });
 }
 
+//Function to display route on the map
 function showRoute(){
   var waypts = [];
   var origin;
@@ -406,17 +443,17 @@ function showRoute(){
     }
   }
   directionsService.route({
-      origin: origin,
-      destination: destination,
-      waypoints: waypts,
-      optimizeWaypoints: true,
-      travelMode: 'WALKING'
-    }, function(response, status) {
-      if (status === 'OK') {
-        directionsDisplay.setDirections(response);
-        var route = response.routes[0];
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
-  }
+    origin: origin,
+    destination: destination,
+    waypoints: waypts,
+    optimizeWaypoints: true,
+    travelMode: 'WALKING'
+  }, function(response, status) {
+    if (status === 'OK') {
+      directionsDisplay.setDirections(response);
+      var route = response.routes[0];
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+}
