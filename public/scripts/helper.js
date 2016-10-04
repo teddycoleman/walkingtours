@@ -97,45 +97,45 @@ function renderStops(stopArray){
   var template = Handlebars.compile(source);
 
   stopArray.forEach(function (stop, index) {
-      $("#pac-input").val('');  
-      
-      // Adds Stop Text to Page
-      var stopHtml = template( stop.stop_id || stop );
-      $('#tour-stops').append(stopHtml);
+    $("#pac-input").val('');  
+    
+    // Adds Stop Text to Page
+    var stopHtml = template( stop.stop_id || stop );
+    $('#tour-stops').append(stopHtml);
 
-      // Adds Stop Markers to Map
-      var placeId = !!(stop.stop_id) ? stop.stop_id.googlePlacesId : stop.googlePlacesId;
-      // Use placeId for the request
-      var request = {
-        placeId: placeId
+    // Adds Stop Markers to Map
+    var placeId = !!(stop.stop_id) ? stop.stop_id.googlePlacesId : stop.googlePlacesId;
+    // Use placeId for the request
+    var request = {
+      placeId: placeId
+    }
+
+    // Use Google service to grab info for the placeId and put on the map
+    service.getDetails(request, function(place, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        //Store info in array for later use
+        var markersIndex = stopArray.length > 1 ? index : markers.length;
+        markers.push({marker: marker, name: place.name, placeId: request.placeId, order: markersIndex});
+
+        //Add markers to the map
+        google.maps.event.addListener(marker, 'touchstart click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+        //Center map on the marker
+        map.setCenter(marker.getPosition());
+
+        //Render route only if the last marker has been placed on the map
+        if(markers.length >= stopArray.length){
+          showRoute();
+        }  
       }
-
-      // Use Google service to grab info for the placeId and put on the map
-      service.getDetails(request, function(place, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          var marker = new google.maps.Marker({
-            map: map,
-            position: place.geometry.location
-          });
-
-          //Store info in array for later use
-          var markersIndex = stopArray.length > 1 ? index : markers.length;
-          markers.push({marker: marker, name: place.name, placeId: request.placeId, order: markersIndex});
-
-          //Add markers to the map
-          google.maps.event.addListener(marker, 'touchstart click', function() {
-            infowindow.setContent(place.name);
-            infowindow.open(map, this);
-          });
-          //Center map on the marker
-          map.setCenter(marker.getPosition());
-
-          //Render route only if the last marker has been placed on the map
-          if(markers.length >= stopArray.length){
-            showRoute();
-          }  
-        }
-      });
+    });
   });
 }
 
@@ -332,10 +332,8 @@ function highlightStop(event){
   var self = this;
 
   markers.forEach(function(element){
-    // console.log(element.placeId);
     if(element.placeId === $(self).find('#google-place-id').val()){
       infowindow.setContent('<div><strong>' + element.name + '</strong><br>');
-      // console.log(element.marker);
       infowindow.open(map, element.marker);
     }
   });
