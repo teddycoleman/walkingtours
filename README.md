@@ -5,6 +5,8 @@ City Hyke allows users to create walking tours and share them with others! Ever 
 
 [https://city-hyke.herokuapp.com/](https://city-hyke.herokuapp.com/)
 
+[Trello Board](https://trello.com/b/kpsFfPJ1/walking-tours-project)
+
 ##Technologies Used
 
 - jQuery
