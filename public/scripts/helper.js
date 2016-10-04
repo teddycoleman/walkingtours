@@ -428,32 +428,37 @@ function showRoute(){
   var waypts = [];
   var origin;
   var destination;
-  for (var i = 0; i < markers.length; i++) {
-    if(markers[i].order === 0 ){
-      origin = {placeId: markers[i].placeId};
+  if (markers.length >= 2){
+    for (var i = 0; i < markers.length; i++) {
+      if(markers[i].order === 0 ){
+        origin = {placeId: markers[i].placeId};
+      }
+      else if(markers[i].order === (markers.length-1) ){
+        destination = {placeId: markers[i].placeId};
+      }
+      else if (markers[i]) {
+        waypts.push({
+          location: {placeId: markers[i].placeId},
+          stopover: true
+        });
+      }
     }
-    else if(markers[i].order === (markers.length-1) ){
-      destination = {placeId: markers[i].placeId};
-    }
-    else if (markers[i]) {
-      waypts.push({
-        location: {placeId: markers[i].placeId},
-        stopover: true
-      });
-    }
+    directionsService.route({
+      origin: origin,
+      destination: destination,
+      waypoints: waypts,
+      optimizeWaypoints: true,
+      travelMode: 'WALKING'
+    }, function(response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(response);
+        var route = response.routes[0];
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
   }
-  directionsService.route({
-    origin: origin,
-    destination: destination,
-    waypoints: waypts,
-    optimizeWaypoints: true,
-    travelMode: 'WALKING'
-  }, function(response, status) {
-    if (status === 'OK') {
-      directionsDisplay.setDirections(response);
-      var route = response.routes[0];
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
-  });
+  else{
+    directionsDisplay.setMap(null);
+  }
 }
