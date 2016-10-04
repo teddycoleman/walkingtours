@@ -14,9 +14,11 @@ City Hyke allows users to create walking tours and share them with others! Ever 
 - HTML
 - EJS
 - CSS
+- Bootstrap
 - Handlebars
 - Google Maps API
 - Google Places API
+- Google Directions API
 
 ##Code We're Proud Of 
 We used EJS for templating.  Here's a very simple example: 
