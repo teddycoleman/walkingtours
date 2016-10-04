@@ -89,7 +89,6 @@ function renderStops(stopArray){
           //Center map on the marker
           map.setCenter(marker.getPosition());
 
-          console.log(markers);
           if(markers.length >= stopArray.length){
             showRoute();
           }  
@@ -244,7 +243,6 @@ function deleteStop(event){
 
 // When Update Tour is successful, render updated data to view
 function updateTourSuccess(data) {
-  var buttonString = " <button type='button' class='button edit-tour-button'>EDIT  TOUR</button>"
   $('#tourNameDisplay').html(data.name);
   $('#tourCity').html('City: '+data.city);
   $('#tourAuthor').html('Author: '+data.author);
@@ -313,7 +311,7 @@ function highlightStop(event){
 
 //Open modal and populate with stop name
 function addNewStopHandler(){
-  if(!currentGooglePlace.placeId.length){
+  if($('#pac-input').val()===""){
     $('#pac-input').focus();
   }
   else{
