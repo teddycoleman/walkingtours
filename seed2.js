@@ -30,6 +30,13 @@ var sampleTours = [{
   city: "San Francisco",
   description: "Check out a pup's favorite places in SF!",
   imageUrl: "http://i.imgur.com/1XnlmtB.png"
+},
+{
+  name: "Icons of Seattle",
+  author: "Toury McTourist",
+  city: "Seattle",
+  description: "Take a tour of the iconic jewel of the Pacific Northwest.",
+  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Space_Needle002.jpg"
 }];
 
 var ferryFilbertStops = [
@@ -150,6 +157,33 @@ googlePlacesId: "ChIJjTkBklp-j4AR07A96zWiYfY"
   googlePlacesId: "ChIJIymP8jZ-j4ARG2AaZxrmZec"
 }];
 
+var iconsOfSeattleStops = [
+ {
+  name: "Pioneer Square",
+  description: " Start your day in Seattle’s most historic neighborhood filled with delicious restaurants, boutiques and more.",
+  googlePlacesId: "ChIJc4rF66RqkFQRnDhOyz3vhwM"
+},
+{
+  name: "Seattle Great Wheel",
+  description: "Then, take a ride on the Seattle Great Wheel, the tallest ferris wheel on the West Coast!",
+  googlePlacesId: "ChIJoUFt6a1qkFQRkYDFPoGU9YU"
+},
+ {
+  name: "Original Starbucks",
+  description: "Grab coffee at the original Starbucks, an iconic Seattle-based coffee chain.",
+  googlePlacesId: "ChIJC8c4xbJqkFQRzxkn4pr96xE"
+},
+ {
+  name: "Pike Place Market",
+  description: "This world famous market has something for everyone from fresh produce and flowers to artwork, antiques and exotic goods.",
+  googlePlacesId: "ChIJy9ZRwbJqkFQRHJ8-Y18dRGA"
+},
+ {
+  name: "Space Needle",
+  description: "Mosey your way through the streets of the city and make your way to finish your day viewing the sunset from atop the Space Needle",
+  googlePlacesId: "ChIJ2cTu4UUVkFQRM-XCxwhyzEQ"
+}];
+
 db.Tour.remove({});
 db.Stop.remove({});
 db.TourStop.remove({});
@@ -202,10 +236,22 @@ db.Tour.create(sampleTours, function(err, tours){
             ord_num: i
           });
         }
-        // end puppy
-          db.TourStop.create(tourStops, function(err, stops){
-            if (err) { return console.log('ERROR', err); }
-          });
+          // end puppy
+          db.Stop.create(iconsOfSeattleStops, function(err, stops){
+          if (err) { return console.log('ERROR', err); }
+
+          for (i = 0; i < 5; i++){
+            tourStops.push({
+              tour_id: tours[4]._id, //tours[3] = Icons of Seattle
+              stop_id: stops[i]._id,
+              ord_num: i
+            });
+          }
+            // end seattle
+            db.TourStop.create(tourStops, function(err, stops){
+              if (err) { return console.log('ERROR', err); }
+            });
+          }); //end seattle
         }); //end puppy
       }); //end haight
     }); //end beaches
